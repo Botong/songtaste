@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>China Air Pollution</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="../css/haha.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/e.css">
+    <link rel="stylesheet" href="../css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-select.min.js"></script>
+    <script src="../js/d3-tip.js"></script>
+    <script> d3.eesur = {}; //namespace  </script>
+    <script src="../js/d3_code_heatmap_cal.js"></script>
+  </head>
+  <body class="container sea" style="padding-top: 80px;">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">China Air Pollution</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#top">Overview</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+            <li><a href="quality">Data Quality</a></li>
+            <li><a href="usertest">User Test</a></li>
+            <li><a href="/poster">Poster</a></li>
+          </ul>
+          </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+        <article>
+          <h1>Air Pollution in China</h1>
+          <p> Every year, millions of people go to China. They are tourists, workers, students or people who just want to experience the Chinese culture. However, after getting off the plane, except the wonderful Chinese culture and astonishing ancient Chinese buildings, one other thing might surprise them: How come the blue sky is so rare in this land? People might go to different places, eat different food and do different things everyday, but the sky is shared. Everyone breathes same air, no difference. Air pollution becomes the most visible but still mysterious problem in China: It is visible, because people can see it by eyes, by seeing how grey the sky is today. Yet it is also mysterious, since people don’t have a clear sense that how dangerous the air pollution is by merely looking at the sky, and also have no idea if the sky in other cities is greyer.
+            <br>
+          For this reason, we want to dig deeper about the air pollution in China, to know how serious the air pollution is in different areas, the extent it threaten to health and also address the possible source to cause the pollution. </p>
+          <h2 id="dataSelection"> Data Selection </h2>
+          <p>There are different datasets that contains data of air pollution in China. We found 3 datasets, which are<a href="http://www.stateair.net/web/historical/1/1.html"> Mission China air quality monitoring program </a>,
+          <a href="http://beijingair.sinaapp.com/">National Air Quality Data and Beijing Air Quality Data</a>, released by China National Environmental Monitoring Centre and Environmental program in Beijing, and <a href="http://aqi.cga.harvard.edu/china/about/">Air Quality Index Archive</a>, released by Harvard University. We finally decided to use on the dataset that released by Harvard University. We chose this dataset for following reasons: <br>
+          1. Although the Mission China air quality monitoring program covers longer time period than other 2 dataset, but it only has the data of PM 2.5. However, PM2.5 isn’t the only source of air pollution, for studying the air pollution in China, we need to also consider other sources of air pollution to know the main factor of air pollution in China, so we decided not to use this dataset.
+          <br>
+          2. The second dataset, National Air Quality Data and Beijing Air Quality Data, provides not only data of PM2.5 but also other pollution sources, which seemed promising, but we still have one concern: the data is from Chinese government. It’s well-known that Chinese government modified their officially released data for covering some social issues. Thus, the dataset might underestimate the air pollution problem in China.
+          <br>
+          3. Finally we chose the third dataset. It contains information of most air pollution sources, and also released by a third-party for academic use. Because the source is from an impartial third-party academic organization, it's less possible that the data is modified to serving the interests of the Chinese government or big companies.
+        </p>
+        <h2> Overview of the dataset </h2>
+        <p id="analysis">  The dataset is from the Air Quality Index Archive, released by Harvard University. The data gained from on ground monitors in China. From Feb 2014 to Feb 2016, the monitors recorded PM2.5, PM10, O3, NO2, SO2 and CO for every 3 hours. The dataset also contains the information of the monitors (name, location) and the weather of the date (includes temperature, pressure, humidity and wind).
+          Data Quality is assured by examined 4C. Please see <a href="/quality">this link</a> to get more details. </p>
+          <h2> Analysis </h2>
+          <p> We want to know the general information of air pollution in China, to understand how serious the air pollution is in different places, if it achieves the level that threaten public health and also address the possible source to cause the pollution. We did some user test to gain feedback and decided the way we present the dataset.
+            Please click <a href="/usertest">here </a>to see the details of user tests. </p>
+            <h3> Where is the pollution? </h3>
+            <iframe  width="100%" height="520" frameborder="0" src="https://bianyi99.carto.com/builder/0e3f8000-0f6c-11e7-a318-0e05a8b3e3d7/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+            <img class="center-block img-thumbnail" width="100%" src="img/IndustrialClusters.png" >
+            <p>Figure 1: Map of China's Top 100 Industrial Clusters. <a href="http://www.chinasourcingblog.org/2011/11/chinas-industrial-clusters.html">source</a>
+          <small>(*Note: Since there isn't public available dataset of accurate locations of factoriess, we can't produce our own picture. However, to give our readers a general sense about where the factories are, we put a pciture of industrial culsters in China, which is released by an research center. This picture isn't created by us, the reason why it is here is only for providing a background understanding to readers. All the credits of this picture is for the orginal organization that released it.</small>)</p>
+          <p> We first plot the data of PM2.5 on a heat map to show the distribution of pollution in China. In the map, a circle represents the average PM2.5 value of all observatory stations in a specific city in one day. When the color of the circle is redder, the pollution is more serious. The color of the circle has seven levels, each of which corresponds to a range of values PM2.5 may lay into. Because the dynamic visualization will plot the overall Chinese map first, you can scale it by clicking "+" to make it larger so as to view detailed differences. The reason why we chose to use PM2.5 is because we found it is the major sources of air pollution in China. We also provide the readers a scroll bar that shows the change of PM2.5 over time. As we can see, on the map, the pollution is more serious in winter than in summer, which could be caused by the direction of monsoon in Asia and the consuming of coal in winter. And also, the pollution is more serious in big cities, which might be the result of the large amount of factories(see Figure 1 for reference), cars and motorcycles in big cities.
+            <br>
+          To further investigate the pollution, we picked four cities that have most serious pollution, which are Beijing, Shanghai, Tianjin and Chongqing. </p>
+          <h3> What is the major source of pollution? </h3>
+          <div class="img-thumbnail">
+            <div id="heatmap_dropdown" class="navbar navbar-default container-fluid">
+              <span>
+                <form>
+                  <select id="index-dropdown" name="index-dropdown" class="selectpicker">
+                    <option value="pm25" selected="selected"> PM2.5 </option>
+                    <option value="pm10">PM10 </option>
+                    <option value="o3">O3 </option>
+                    <option value="no2">NO2 </option>
+                    <option value="so2">SO2 </option>
+                    <option value="co">CO </option>
+                  </select>
+                  <select id="city-dropdown" name="city-dropdown" class="selectpicker">
+                    <option value="Beijing" selected="selected"> Beijing </option>
+                    <option value="Shanghai">Shanghai </option>
+                    <option value="Chongqing">Chongqing </option>
+                    <option value="Tianjin">Tianjin </option>
+                  </select>
+                </form>
+              </span>
+            </div>
+          <section id="heatmap"></section>
+        </div>
+      </article>
+      <div id="stats">
+        <div>connecting...</div>
+      </div>
+      <p>In this graph, each cell represents the average value of air pollution within one day; the darker the cell is, the pollution is higher. Readers can choose which cities they want to investigate and also can choose the specific type of air pollution (PM2.5, PM10, O3, NO2, SO2 and CO). When users hoover mouse over each cell, they can see the detail of each day.
+      <br>
+
+We found that the pollution of PM2.5 is more serious than other pollution sources, because it has higher concentration than the others in different cities. By switching the tab of different sources of pollution, we can see the color of cells of PM2.5 generally much dark than other sources. Also, we see the same trend that the pollution is worse in winter, but there are still days in summer that were highly polluted.
+ <br>
+
+Although in winter, most days were with serous air pollution, we can still see some days had much lighter red then the cells next to them. For example, on November 11th 2014, we can see there are two adjacent cells mysterious lighter than their other neighbors. What happened on that two days?
+        <br>
+
+     The days showed the famous “APEC blue”. In 2014, to prepare the APEC summit in Beijing(November 10th – 11th ), started from November 3rd, every high-emission factories in Jingjinji Area (Beijing, Tianjin and Hebei) was stopped working, citizens were also not restricted to drive (regulations like only car’s with even license plate number could be driven on the road were implemented), most people who worked in government-owned organization also got a break from November 7th to November 12th. Some area in Tianjin even stopped heat networks. According to <a href="http://news.xinhuanet.com/local/2014-10/29/c_1113032916.htm">news report</a>, in Hebei, 2,386 companies stopped manufacturing and 2,445 constructions were stopped. As the result of the regulations, we saw the very good air quality in November 11th and November 12th. After the regulations were discontinued, the air pollution came back again – The air quality of November 15th became “very unhealthy”. No need to read news, citizens knew the end of APEC summit by looking at the sky.</p>
+
+      <h3> What time is the air pollution more serious?</h3>
+
+      <div id="viz">
+        <div class="title">
+          <h1>Bubbles of...<span>pollution</span></h1><h3>How is the air pollution in large cities in China?</h3>
+        </div>
+        <div id="sea">
+          <div class="title">
+            <h1>Bubbles of...<span>pollution</span></h1><h3>How is the air pollution in large cities in China?</h3>
+          </div>
+        </div>
+        <div id="mode">
+          <a id="multi" class="fs1" aria-hidden="true" data-icon="&#xe002;"><span>multi rows</span></a>
+          <a id="single" class="fs1" aria-hidden="true" data-icon="&#xe001;"><span>single stream</span></a>
+        </div>
+        <div id="statuses"></div>
+        <div id="dragme">
+          <div id="gauge"><span>Drag me</span></div>
+        </div>
+      </div>
+      <script src="../js/c1.js"></script>
+      <p> We also want to know at which time the air pollution is more serious and if it reached that level that might cause danger to health. To see the trend within a day, we created an interactive graph, and also calculated AQI (Air Quality Index) to know how dangerous it is to health. The graph use circles to show the AQI for each city. Each circle represents a data point. The y-axis and radius of the circles corresponds to the value of amount of pollution, when the circle is higher/bigger, the danger of air pollution to health is higher. The x-axis corresponds to time of the data. Users can drag the line to see the details of the data, and also see if the air quality cause danger to users. Four cities(Beijing, Shanghai, Tianjin and Chongqing) are plotted on the graph, to examine single city, people can also switch between view of Multiview and Singalview by clicking thebutton on the bottom right corner of the graph.
+
+        <br>
+        We found that, generally speaking, air pollution in Beijing and Tianjin cause more health concerns than in the other two cities. We also found that, for each day, the air quality around 10pm is slightly worse than other time, considering the commuters might go back home from 6 to 8 pm, which caused lots of traffic, it is reasonable to see the difference, and the result also implies that the ownership of private vehicles might make the air pollution problem more serious.
+      </p>
+
+      <script>
+      // *****************************************
+      // render chart
+      // *****************************************
+      (function() {
+      'use strict';
+      var nestedData;
+      var parseDate = d3.time.format('%Y-%m-%d').parse;
+      // create chart
+      var heatChart = d3.eesur.heatmap()
+      .height(500)
+      .startYear('2014')
+      .endYear('2017')
+      .on('_hover', function (d, i) {
+      var f = d3.time.format('%B %d, %Y');
+      d3.select('#info')
+      .text(function () {
+      return 'date: ' + f(d) + ' | value: ' + nestedData[d];
+      });
+      });
+      var city = "Beijing";
+      var index = "pm25";
+      var index_select = $( '#index-dropdown' );
+      var city_select = $( '#city-dropdown' );
+      index_select.change( function() {
+      index = $( this ).val();
+      mapData();
+      });
+      city_select.change( function() {
+      city = $( this ).val();
+      mapData();
+      });
+      mapData();
+      function mapData() {
+      // apply after nesting data
+      d3.json('../file/bigcity.json', function(error, data) {
+      if (error) return console.warn(error);
+      nestedData = d3.nest()
+      .key(function (d) {
+      return parseDate(d.date);
+      })
+      .rollup(function (n) {
+      n = n[0]
+      if("undefined" === typeof n.value)
+      return 0;
+      if("undefined" === typeof n.value[city])
+      return 0;
+      return n.value[city][index];
+      })
+      .map(data);
+      d3.select(".chart").remove();
+      // render chart
+      d3.select('#heatmap')
+      .datum(nestedData)
+      .call(heatChart);
+      });
+      }
+      }());
+      d3.select(self.frameElement).style('height', '800px');
+      </script>
+    </body>
+  </html>
