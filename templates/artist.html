@@ -40,7 +40,29 @@
               {% if tracks %}
                   <section class="sec tracks">
                     <h3>Top Tracks</h3>
-                    {% include 'partials/tracks-list.html' %}
+                    <table class="table table-condensed tracks">
+                      <thead>
+                        <tr>
+                          <th>Track</th>
+                          <th>Popularity</th>
+                        </tr>
+                      </thead>
+                        {% for t in tracks %}
+                            <tr class="track">
+                              <td>
+                                  <div class="track-info">
+                                    <span class="track-name"><a href="/artist/{{ artist.id }}/track/{{t.id}}">{{ t.name }}</a></span>
+                                    <span class="album-name">
+                                          {{ t.album.name }}
+                                    </span>
+                                  </div>
+                                  <audio src="{{ t.preview_url }}" preload="auto" />
+                              </td>
+                              <td class="number">{{ t.popularity }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
                   </section>
               {% endif %}
             </div>

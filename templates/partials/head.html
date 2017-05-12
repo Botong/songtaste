@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Spotify Browser</title>
     <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'img/favicon.ico')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='../css/mystyles.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">
+{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
+{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
     <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap-select.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='../css/narrow-jumbotron.css')}}">
 
 {#    <link rel="stylesheet" href="../css/normalize.css">#}
 {#    <link rel="stylesheet" href="../css/e.css">#}
@@ -17,10 +18,10 @@
 {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
 {#    <script src="../js/d3-tip.js"></script>#}
 
+    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='../js/audiojs/audio.min.js')}}"></script>
     <script src="{{url_for('static', filename='../js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='../js/bootstrap-select.min.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/jquery-3.1.1.min.js')}}"></script>
     <script>
       audiojs.events.ready(function() {
         var as = audiojs.createAll();

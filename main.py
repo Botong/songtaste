@@ -1,7 +1,7 @@
 # Imports
 import os
 import jinja2
-from flask import render_template, Flask
+from flask import render_template, request, redirect, url_for, Flask
 from spotify import *
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -27,8 +27,9 @@ def homepage():
     return html
 
 
-@app.route('/search/<name>')
-def search(name):
+@app.route('/search', methods=['POST'])
+def searchArtist():
+    name = request.form['artist']
     data = search_by_artist_name(name)
     api_url = data['artists']['href']
     items = data['artists']['items']
@@ -58,6 +59,16 @@ def artist(id):
                            related_artists=relartists,
                            image_url=image_url,
                            tracks=tracks)
+    return html
+
+
+@app.route('/artist/<artist_id>/track/<track_id>')
+def track(artist_id, track_id):
+    artist_info = get_artist(artist_id)
+    features = get_track_audio_features(track_id)
+    html = render_template('track.html',
+                           features=features,
+                           artist=artist_info)
     return html
 
 

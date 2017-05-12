@@ -1,29 +1,13 @@
 
 {% include 'partials/head.html' %}
 
-
-<section id="woz-content">
-
-  <div class="container">
-    <h1 class="page-title">hello world</h1>
-
-
-    <h2>Sample pages</h2>
-
-    <ul>
-      <li><a href="{{url_for('search', name='Johnny Cash')}}">Search for "Johnny Cash"</a></li>
-      <li>
-        <a href="{{url_for('artist', id='6vWDO969PvNqNYHIOW5v0m')}}">
-          View Beyoncé's page
-        </a>
-      </li>
-    </ul>
-
-  </div>
-
-
-
-
-</section>
+<div class="container">
+    <section id="woz-content" class="webdesigntuts-workshop">
+        <form action="search" method='POST'>
+            <input type=text name=artist value="{{ request.form.search}}">
+            <button>Search</button>
+        </form>
+    </section>
+</div>
 
 {% include 'partials/foot.html' %}
