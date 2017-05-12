@@ -13,7 +13,7 @@ GET_RECOMMENDATION_ENDPOINT = 'https://api.spotify.com/v1/recommendations'
 AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token'
 CLIENT_ID = "e812542290fe4c5d832907d8b9f5a0cc"
 CLIENT_SECRET = "2421257d44844f35af27e63e7c6499ed"
-TOKEN = 'BQBb6Lcekdd4_yNc77rO8Fk5R1cuJb0_UdS-LlPx57yFIQH4Su0ZSieJ1mU0ELy5R1QHF0d9d-a3lMq4ogg2nQ'
+TOKEN = 'BQAKS9XxiXquOqVpeYJYLGTiCVtNqTbQj2yNOa9SkQkZaMmDNLUOvlmK9s0Ps98HWzxHWWsW4WXJofKj4-mhqA'
 
 
 def authenticate():
