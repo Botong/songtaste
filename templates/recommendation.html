@@ -1,46 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- saved from url=(0045)http://charts.animateddata.co.uk/datavistree/ -->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Spotify Browser</title>
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'img/favicon.ico')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/mystyles.css')}}">
-{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
-{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/style.css')}}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="css/style.css">
     <!-- <script async="" src="js/analytics.js"></script> -->
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/narrow-jumbotron.css')}}">
-
-{#    <link rel="stylesheet" href="../css/normalize.css">#}
-{#    <link rel="stylesheet" href="../css/e.css">#}
-{#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
-{#    <script src="../js/d3-tip.js"></script>#}
-
-    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/audiojs/audio.min.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/bootstrap-select.min.js')}}"></script>
-<!--
-    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>
- -->
-    <script src="{{url_for('static', filename='../js/d3.v3.min.js')}}"></script>
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <!-- <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-55956641-1', 'auto');
+    ga('send', 'pageview');
+    </script> -->
 </head>
 <body>
-
-{% include 'partials/header.html' %}
-
-<section id="woz-content">
-    <div id="body">
+<div id="body">
     <div id="header">
         Tools and Libraries for Building Web-based Data Visualisations
     </div>
     <div id="footer">
-        <video controls="" autoplay="" name="media"><source src="https://p.scdn.co/mp3-preview/afdd501c6e2af4f4a5c91108825a7793cbd408a4?cid=e812542290fe4c5d832907d8b9f5a0cc" type="audio/mpeg"></video>
         <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and is
             for a presentation by <a href="http://animateddata.co.uk/">Peter Cook</a> at <a
                     href="http://www.meetup.com/Data-Visualisation-Brighton/">Data Visualisation Brighton</a>.</p>
@@ -56,16 +37,7 @@
         </div>
     </div>
 </div>
-    <div class="container">
-        <h4>Artist info</h4>
-        {{ artist }}
-        <h4>Feature info</h4>
-        {{ features }}
-    </div>
 
-
-</section>
-{% include 'partials/foot.html' %}
 
 <script>
 
@@ -85,12 +57,12 @@
         .attr("height", h + m[0] + m[2])
         .append("svg:g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-    d3.json("/data/recdata.json", function (json) {
-{#    alert("{{ recommendation }}");#}
-{#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
+{#    d3.json("data/data.json", function (json) {#}
+    d3.json("{{ recommendation }}", function (json) {
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
+        console.log(json);
         function toggleAll(d) {
             if (d.children) {
                 d.children.forEach(toggleAll);
@@ -104,8 +76,8 @@
 //         toggle(root._children[1]._children[2]);
 //         toggle(root._children[9]);
 //         toggle(root._children[9]._children[0]);
-        toggleAll(root);
-        update(root);
+{#        toggleAll(root);#}
+{#        update(root);#}
     });
     function update(source) {
         var duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -152,7 +124,7 @@
                 return d.name;
             })
             .style('fill', function (d) {
-                return 'black'//d.free ? 'black' : '#999';
+                return d.free ? 'black' : '#999';
             })
             .style("fill-opacity", 1e-6);
         nodeEnter.append("svg:title")
@@ -227,3 +199,7 @@
         }
     }
 </script>
+
+</body>
+<div></div>
+</html>

@@ -54,7 +54,7 @@ _entity_headers = frozenset([
     'expires', 'last-modified'
 ])
 _hop_by_hop_headers = frozenset([
-    'connection', 'keep-alive', 'proxy-authenticate',
+    'connection', 'keep-alive', 'proxy-get_token',
     'proxy-authorization', 'te', 'trailer', 'transfer-encoding',
     'upgrade'
 ])

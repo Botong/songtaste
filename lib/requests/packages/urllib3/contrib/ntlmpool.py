@@ -54,7 +54,7 @@ class NTLMConnectionPool(HTTPSConnectionPool):
         headers = {}
         headers['Connection'] = 'Keep-Alive'
         req_header = 'Authorization'
-        resp_header = 'www-authenticate'
+        resp_header = 'www-get_token'
 
         conn = HTTPSConnection(host=self.host, port=self.port)
 

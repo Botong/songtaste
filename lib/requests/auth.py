@@ -154,7 +154,7 @@ class HTTPDigestAuth(AuthBase):
             # it was to resend the request.
             r.request.body.seek(self.pos)
         num_401_calls = getattr(self, 'num_401_calls', 1)
-        s_auth = r.headers.get('www-authenticate', '')
+        s_auth = r.headers.get('www-get_token', '')
 
         if 'digest' in s_auth.lower() and num_401_calls < 2:
 
