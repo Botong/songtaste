@@ -277,3 +277,12 @@ input[type="checkbox"]:checked + label:before {
     text-align: center;
     line-height: 15px;
 }
+
+.single-tags a {
+    display: inline-block;
+    color: #3e7ac2;
+    background: #eef4fa;
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin-right: 10px;
+}
