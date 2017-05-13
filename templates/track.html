@@ -18,21 +18,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">
 
-
-{% include 'partials/head.html' %}
-<section id="woz-content">
-{#  <div class="container">#}
-{#      <h4>Artist info</h4>#}
-{#      {{ artist }}#}
-{#      <h4>Feature info</h4>#}
-{#      {{features}}#}
-{#  </div>#}
-    {% include 'partials/radar.html' %}
-
-</section>
-
-{% include 'partials/foot.html' %}
-
     {#    <link rel="stylesheet" href="../css/normalize.css">#}
     {#    <link rel="stylesheet" href="../css/e.css">#}
     {#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
@@ -44,7 +29,7 @@
     <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>
     <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
     <!--
     <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>
@@ -56,9 +41,12 @@
 {% include 'partials/header.html' %}
 
 
-    <div class="sidebars">
-    <div class="sidebar right">I am on right!</div>
-        </div>
+<div class="sidebars">
+    <div class="sidebar right">
+        {% include 'partials/radar.html' %}
+    </div>
+</div>
+
 <section id="woz-content">
 
     <div id="body">
@@ -90,7 +78,7 @@
 
 <footer class="footer">
     <div class="container">
-{#        <a href="#" class="btn btn-primary" data-action="toggle" data-side="right"><span>Toggle Right</span></a>#}
+        {#        <a href="#" class="btn btn-primary" data-action="toggle" data-side="right"><span>Toggle Right</span></a>#}
         <audio id="audio" controls loop style="width: 100%">
             <source id="mpeg_source" src="" type="audio/mpeg">
         </audio>
@@ -103,13 +91,13 @@
     // Sidebar on right side
     sidebar.sidebar({side: "right"});
     // Click handlers
-{#    $(".btn[data-action]").on("click", function () {#}
-{#        var $this = $(this);#}
-{#        var action = $this.attr("data-action");#}
-{#        var side = $this.attr("data-side");#}
-{#        $(".sidebar." + side).trigger("sidebar:" + action);#}
-{#        return false;#}
-{#    });#}
+    {#    $(".btn[data-action]").on("click", function () {#}
+    {#        var $this = $(this);#}
+    {#        var action = $this.attr("data-action");#}
+    {#        var side = $this.attr("data-side");#}
+    {#        $(".sidebar." + side).trigger("sidebar:" + action);#}
+    {#        return false;#}
+    {#    });#}
 
     var audio = document.getElementById("audio");
     var source = document.getElementById("mpeg_source");
@@ -152,7 +140,7 @@
         sidebar.trigger("sidebar:close");
     }
 
-    d3.json("/data/recdata2.json", function (json) {
+    d3.json("/data/recdata.json", function (json) {
         {#    alert("{{ recommendation }}");#}
         {#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
         root = json;
@@ -238,15 +226,15 @@
                 return d.name;
             })
             .style('fill', function (d) {
-{#                if (d.preview_url === null) {#}
-{#                    return '#999';#}
-{#                } else {#}
-{#                    if (playing === d) {#}
-{#                        return 'blue';#}
-{#                    } else {#}
-{#                        return 'black';#}
-{#                    }#}
-{#                }#}
+                {#                if (d.preview_url === null) {#}
+                {#                    return '#999';#}
+                {#                } else {#}
+                {#                    if (playing === d) {#}
+                {#                        return 'blue';#}
+                {#                    } else {#}
+                {#                        return 'black';#}
+                {#                    }#}
+                {#                }#}
                 return d.preview_url !== null ? 'black' : '#999';
             })
             .style("fill-opacity", 1e-6);
