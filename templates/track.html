@@ -4,12 +4,22 @@
     <div class="sidebar right">
         <div class="radarChart">
         </div>
-        <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
-            <label id="radarRoot" for="root" style="color: #000;"></label>
-        <input type="checkbox" id="current" class="checkbox" onclick="toggleRadarCurrent()">
-            <label id="radarCurrent" for="current" style="color: #000"></label>
-        <input type="checkbox" id="parent" class="checkbox" onclick="toggleRadarParent()">
-            <label id="radarParent" for="parent" style="color: #000"></label>
+        <div style="margin-left: 100px">
+            <div class="row">
+                <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
+                <label id="radarRoot" for="root" style="color: #000;"></label>
+            </div>
+            <div class="row">
+                <input type="checkbox" id="current" class="checkbox" onclick="toggleRadarCurrent()">
+                <label id="radarCurrent" for="current" style="color: #000"></label>
+            </div>
+            <div class="row">
+                <input type="checkbox" id="parent" class="checkbox" onclick="toggleRadarParent()">
+                <label id="radarParent" for="parent" style="color: #000"></label>
+            </div>
+        </div>
+
+
         <script src="{{ url_for('static', filename='../js/radarChart.js') }}"></script>
     </div>
 </div>
