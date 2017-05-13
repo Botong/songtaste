@@ -192,7 +192,7 @@ path.link {
 }
 
 .limit-text {
-    display: inline-block;
+    /*display: inline-block;*/
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
