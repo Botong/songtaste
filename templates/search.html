@@ -57,13 +57,17 @@
                             <a href={{ url_for('artist', id=item.id) }}>
                                 {% if item.images | length > 1 %}
                                     {% set imageUrl = item.images[1].url %}
+                                    {% if item.images[1].height > item.images[1].width %}
+                                        {% set direction = "portrait" %}
+                                    {% else %}
+                                        {% set direction = "landscape" %}
+                                    {% endif %}
                                 {% endif %}
 {#                                <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable"#}
 {#                                     style="background-image: url({{ imageUrl }})">#}
 {#                                </div>#}
                                 <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable" style="width: 323px; height: 323px; object-position: center; display: inline-block; overflow: hidden">
-                                    <img src="{{ imageUrl }}"
-                                         style="height: 100%; position: relative; left: 50%; transform: translateX(-50%);">
+                                    <img class="{{ direction }}" src="{{ imageUrl }}">
                                 </div>
                             </a>
                             <div class="track-info">
@@ -80,5 +84,11 @@
         {% endif %}
     </div>
 </section>
+
+<script>
+    function loaded() {
+        alert(this.height)
+    }
+</script>
 
 {% include 'partials/foot.html' %}

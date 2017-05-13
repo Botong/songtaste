@@ -168,3 +168,17 @@ path.link {
     -ms-user-select: none;
     user-select: none;
 }
+
+.landscape {
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.portrait {
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
