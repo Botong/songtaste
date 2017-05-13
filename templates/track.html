@@ -2,8 +2,9 @@
 
 <div class="sidebars noselect">
     <div class="sidebar right">
-        <h2 style="color: #2a2a2a">Title</h2>
-        <div class="radarChart" style="margin-left: -72px">
+        <h3 style="color: #2a2a2a" id="sidebar_title">Title</h3>
+        <h6 style="color: #4a4a4a" id="sidebar_artist">Title</h6>
+        <div class="radarChart" style="margin-left: -72px; margin-top: -24px;">
         </div>
         <div style="margin-left: 100px">
             <div class="row">
@@ -27,7 +28,7 @@
 
 <section id="woz-content">
     <div id="body">
-        <div id="header">
+        <div id="header" style="margin-left: 6px">
             Click on a circle to compare the recommended song with what you like.
             <p>Double Click to recommend more like the song you choose.
         </div>
@@ -80,6 +81,9 @@
 
     var body = $('body');
     body.loading();
+
+    var side_title = document.getElementById("sidebar_title");
+    var side_artist = document.getElementById("sidebar_artist");
 
     var track_name = document.getElementById("track_name");
     var artist_name = document.getElementById("artist_name");
@@ -225,6 +229,8 @@
             .on("dblclick", function (d) {
                 if (d !== root) {
                     body.loading();
+                    side_title.innerText = d.name;
+                    side_artist.innerText = d.artist.name;
                     toggle(d);
                     update(d);
                     body.loading('stop');
