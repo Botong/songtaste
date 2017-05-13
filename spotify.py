@@ -13,11 +13,8 @@ GET_TRACK_AUDIO_FEATURES_ENDPOINT = 'https://api.spotify.com/v1/audio-features/{
 GET_SEVERAL_TRACK_FEATURES_ENDPOINT = 'https://api.spotify.com/v1/audio-features/?ids={ids}'
 GET_RECOMMENDATION_ENDPOINT = 'https://api.spotify.com/v1/recommendations'
 AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token'
-<<<<<<< HEAD
 GET_ALBUM_ENDPOINT = 'https://api.spotify.com/v1/albums/{id}'
-=======
 GET_A_TRACK_ENDPOINT = 'https://api.spotify.com/v1/tracks/{id}'
->>>>>>> b2578b53124d4781977a766aee6e81928b027373
 CLIENT_ID = "e812542290fe4c5d832907d8b9f5a0cc"
 CLIENT_SECRET = "2421257d44844f35af27e63e7c6499ed"
 TOKEN = 'BQAKS9XxiXquOqVpeYJYLGTiCVtNqTbQj2yNOa9SkQkZaMmDNLUOvlmK9s0Ps98HWzxHWWsW4WXJofKj4-mhqA'
@@ -103,8 +100,6 @@ def get_track_audio_features(track_id):
     headers = {"Authorization": "Bearer " + get_token()}
     url = GET_TRACK_AUDIO_FEATURES_ENDPOINT.format(id=track_id)
     resp = requests.get(url, headers=headers)
-<<<<<<< HEAD
-=======
     return resp.json()
 
 
@@ -114,15 +109,14 @@ def get_several_track_features(track_ids):
     ids = ','.join(track_ids)
     url = GET_SEVERAL_TRACK_FEATURES_ENDPOINT.format(ids=ids)
     resp = requests.get(url, headers=headers)
->>>>>>> b2578b53124d4781977a766aee6e81928b027373
     return resp.json()
 
 
 # https://developer.spotify.com/web-api/get-recommendations/
 def get_recommendation(track_id, artist_id):
-<<<<<<< HEAD
-    params = {'seed_artists': artist_id, 'seed_tracks': track_id}
-    resp = requests.get(GET_RECOMMENDATION_ENDPOINT, params)
+    headers = {"Authorization": "Bearer " + get_token()}
+    params = {'seed_artists': artist_id, 'seed_tracks': track_id, 'limit': 81}
+    resp = requests.get(GET_RECOMMENDATION_ENDPOINT, params=params, headers=headers)
     return resp.json()
 
 
@@ -130,9 +124,3 @@ def get_album(album_id):
     url = GET_ALBUM_ENDPOINT.format(id=album_id)
     resp = requests.get(url)
     return resp.json()
-=======
-    headers = {"Authorization": "Bearer " + get_token()}
-    params = {'seed_artists': artist_id, 'seed_tracks': track_id, 'limit': 81}
-    resp = requests.get(GET_RECOMMENDATION_ENDPOINT, params=params, headers=headers)
-    return resp.json()
->>>>>>> b2578b53124d4781977a766aee6e81928b027373

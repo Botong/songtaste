@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13293b3f-d6b8-40d6-b4f4-1f7ffc1a5df6" name="Default" comment="" />
+    <list default="true" id="13293b3f-d6b8-40d6-b4f4-1f7ffc1a5df6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spotify.py" afterPath="$PROJECT_DIR$/spotify.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/partials/head.html" afterPath="$PROJECT_DIR$/templates/partials/head.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/track.html" afterPath="$PROJECT_DIR$/templates/track.html" />
+    </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +22,8 @@
       <file leaf-file-name="spotify.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spotify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="951">
-              <caret line="134" column="77" lean-forward="false" selection-start-line="134" selection-start-column="77" selection-end-line="134" selection-end-column="77" />
+            <state relative-caret-position="740">
+              <caret line="37" column="12" lean-forward="true" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -102,8 +107,8 @@
       <file leaf-file-name="track.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/track.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1542">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state relative-caret-position="1148">
+              <caret line="58" column="5" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="5" />
               <folding>
                 <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -111,11 +116,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="30" column="17" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+            <state relative-caret-position="391">
+              <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="head.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/partials/head.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,10 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>token</find>
-      <find>free</find>
-      <find>.name</find>
-      <find>recommendation</find>
       <find>features</find>
       <find>alert</find>
       <find>depth</find>
@@ -160,8 +171,12 @@
       <find>hint</find>
       <find>align</find>
       <find>text</find>
-      <find>&lt;</find>
       <find>60</find>
+      <find>=======</find>
+      <find>=====</find>
+      <find>HEAD</find>
+      <find>&lt;</find>
+      <find>&lt;&lt;&lt;</find>
     </findStrings>
     <replaceStrings>
       <replace>param</replace>
@@ -174,6 +189,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/track.html" />
+        <option value="$PROJECT_DIR$/spotify.py" />
+        <option value="$PROJECT_DIR$/templates/partials/head.html" />
       </list>
     </option>
   </component>
@@ -870,6 +887,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1964">
           <caret line="48" column="16" lean-forward="true" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -905,14 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Python/2.7/site-packages/mkdocs/themes/simplex/css/bootstrap-custom.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -934,16 +944,6 @@
         <state relative-caret-position="94">
           <caret line="59" column="30" lean-forward="true" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spotify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="951">
-          <caret line="134" column="77" lean-forward="false" selection-start-line="134" selection-start-column="77" selection-end-line="134" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1002,20 +1002,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spotify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="37" column="12" lean-forward="true" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/track.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1542">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+        <state relative-caret-position="1148">
+          <caret line="58" column="5" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="5" />
           <folding>
             <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
+    <entry file="file://$PROJECT_DIR$/templates/partials/head.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="30" column="17" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        <state relative-caret-position="38">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
