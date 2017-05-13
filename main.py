@@ -28,14 +28,24 @@ def homepage():
 
 
 @app.route('/search', methods=['POST'])
-def searchArtist():
+def search():
     name = request.form['artist']
     data = search_by_artist_name(name)
-    api_url = data['artists']['href']
-    items = data['artists']['items']
+    image = None
+    if not data['artists']['items']:
+        data = search_by_track_name(name)
+        api_url = data['tracks']['href']
+        items = data['tracks']['items']
+        # print data['tracks']['items'][0]['artists']
+        type = 'track'
+    else:
+        api_url = data['artists']['href']
+        items = data['artists']['items']
+        type = 'artist'
     html = render_template('search.html',
-                           artist_name=name,
+                           item_name=name,
                            results=items,
+                           type=type,
                            api_url=api_url)
     return html
 

@@ -1,48 +1,80 @@
-
 {% include 'partials/head.html' %}
 
-
 <section id="woz-content">
-  <div class="container">
-    <h3>Searching for
-      artists with the name of:
-      <em>{{artist_name}}</em>
-    </h3>
+    {% set imageUrl = '/img/artist.png' %}
+    <div class="container">
+        {% if type == 'track' %}
+            <div class="row">
+                {% if results | length > 0 %}
+                    {% if results[0].album.images | length > 1 %}
+                        {% set imageUrl = results[0].album.images[1].url %}
+                    {% endif %}
+                    <div class="col-sm-4 cover-art-image cover-art-image-loaded cover-art shadow rounded actionable"
+                         style="background: url({{ imageUrl }});
+                                 background-repeat: no-repeat; background-position: center">
+                    </div>
+                {% else %}
+                    <section class="search">
+                        <div class="search-box">
+                            <div class="introduction-text">
+                                <h4>No result found</h4>
+                            </div>
+                            <div class="cancel"></div>
+                            <form class="search-form" action="search" method='POST'>
+                                <div class="query-box">
+                                    <input class="query-input" type=text name=artist
+                                           placeholder="e.g. 'taylor swift', 'queen'">
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                {% endif %}
 
+                <div class="col-sm-8">
+                    <table class="search-results table table-condensed table-striped">
+                        {% for item in results %}
+                            <tr>
+                                <td>
+                                    <div class="track-info">
+                                        <a href="{{ url_for('track', artist_id=item.artists[0].id, track_id=item.id) }}">
+                                            <div class="track-name"> {{ item.name }} </div>
+                                        </a>
+                                        <div class="album-name"> {{ item.artists[0].name }}
+                                            • {{ item.album.name }} </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
 
+        {% else %}
+            <div class="row">
+                {% for item in results %}
+                    {% if item is not none %}
+                        <div class="col-md-6">
+                            <a href={{ url_for('artist', id=item.id) }}>
+                                {% if item.images | length > 1 %}
+                                    {% set imageUrl = item.images[1].url %}
+                                {% endif %}
+                                <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable"
+                                     style="background-image: url({{ imageUrl }})">
+                                </div>
+                            </a>
+                            <div class="track-info">
+                                <a href="{{ url_for('artist', id=item.id) }}">
+                                    <div class="track-name text-center"
+                                         style="margin-left: -15px; padding-bottom: 20px; padding-top: 20px"> {{ item.name }} </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
-    <table class="search-results table table-condensed table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Genre</th>
-          <th>Followers</th>
-          <th>Popularity</th>
-        </tr>
-      </thead>
-      {% for artist in results %}
-        <tr>
-          <td>
-              {% if artist.images %}
-                <img src="{{artist.images[-1].url}}" alt="{{artist.name}}" class="bobby img-circle">
-              {% endif %}
-            <a href="{{ url_for('artist', id=artist.id) }}">
-              {{ artist.name }}
-            </a>
-          </td>
-          <td>
-            {{ artist.genres | join(', ')}}
-          </td>
-          <td class="number">{{ artist.followers.total }}</td>
-          <td class="number">{{ artist.popularity }}</td>
-        </tr>
-      {% endfor %}
-
-    </table>
-
-
-
-  </div>
+            </div>
+        {% endif %}
+    </div>
 </section>
 
 {% include 'partials/foot.html' %}
