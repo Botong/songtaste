@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13293b3f-d6b8-40d6-b4f4-1f7ffc1a5df6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/partials/head.html" afterPath="$PROJECT_DIR$/templates/partials/head.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/track.html" afterPath="$PROJECT_DIR$/templates/track.html" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +14,6 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/music-recommend$music_recommend.coverage" NAME="music-recommend Coverage Results" MODIFIED="1494453813935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-  </component>
-  <component name="CreatePatchCommitExecutor">
-    <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -77,33 +72,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="track.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/track.html">
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/partials/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3900">
-              <caret line="195" column="35" lean-forward="false" selection-start-line="195" selection-start-column="35" selection-end-line="195" selection-end-column="35" />
-              <folding>
-                <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2940">
-              <caret line="147" column="14" lean-forward="false" selection-start-line="147" selection-start-column="14" selection-end-line="147" selection-end-column="14" />
+            <state relative-caret-position="460">
+              <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/partials/header.html">
+      <file leaf-file-name="track.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/track.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+            <state relative-caret-position="-130">
+              <caret line="51" column="64" lean-forward="false" selection-start-line="51" selection-start-column="64" selection-end-line="51" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -120,12 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nav-item</find>
-      <find>nav-link</find>
-      <find>input</find>
-      <find>footer</find>
-      <find>data.j</find>
-      <find>GET_RECOMMENDATION_ENDPOINT</find>
       <find>token</find>
       <find>free</find>
       <find>.name</find>
@@ -143,13 +120,19 @@
       <find>back</find>
       <find>menu</find>
       <find>nav</find>
-      <find>60</find>
       <find>Tools</find>
       <find>black</find>
       <find>startPlay</find>
       <find>isPlaying</find>
       <find>open</find>
+      <find>recdata</find>
       <find>click</find>
+      <find>Header</find>
+      <find>hint</find>
+      <find>align</find>
+      <find>text</find>
+      <find>&lt;</find>
+      <find>60</find>
     </findStrings>
     <replaceStrings>
       <replace>param</replace>
@@ -161,25 +144,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/app.yaml" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/templates/DataQuality.html" />
-        <option value="$PROJECT_DIR$/templates/partials/tracks-list.html" />
-        <option value="$PROJECT_DIR$/templates/artist.html" />
-        <option value="$PROJECT_DIR$/css/bootstrap.min.css" />
-        <option value="$PROJECT_DIR$/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/templates/partials/foot.html" />
-        <option value="$PROJECT_DIR$/templates/partials/footer.html" />
-        <option value="$PROJECT_DIR$/templates/homepage.html" />
-        <option value="$PROJECT_DIR$/css/mystyles.css" />
-        <option value="$PROJECT_DIR$/templates/recommendation.html" />
-        <option value="$PROJECT_DIR$/spotify.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/templates/partials/head.html" />
-        <option value="$PROJECT_DIR$/templates/partials/header.html" />
         <option value="$PROJECT_DIR$/templates/track.html" />
-        <option value="$PROJECT_DIR$/css/style.css" />
       </list>
     </option>
   </component>
@@ -286,23 +251,6 @@
       <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-    <property name="js.eslint.eslintPackage" value="" />
-    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/css" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/lib/requests" />
-      <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/js" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -581,13 +529,6 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="13293b3f-d6b8-40d6-b4f4-1f7ffc1a5df6" name="Default" comment="" />
-      <created>1494444162095</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1494444162095</updated>
-    </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -614,12 +555,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
-  </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.pl" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -688,9 +623,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding>
-            <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -899,14 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/foot.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/partials/head.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -931,26 +856,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/artist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/f2py/docs/default.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="94">
           <caret line="59" column="30" lean-forward="true" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -977,19 +886,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2940">
-          <caret line="147" column="14" lean-forward="false" selection-start-line="147" selection-start-column="14" selection-end-line="147" selection-end-column="14" />
+        <state relative-caret-position="291">
+          <caret line="30" column="17" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/partials/foot.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/partials/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/artist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/track.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3900">
-          <caret line="195" column="35" lean-forward="false" selection-start-line="195" selection-start-column="35" selection-end-line="195" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="-130">
+          <caret line="51" column="64" lean-forward="false" selection-start-line="51" selection-start-column="64" selection-end-line="51" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>

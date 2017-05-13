@@ -49,6 +49,7 @@
     <div id="body">
         <div id="header">
             Click on a circle to compare the recommended song with what you like.
+            <p>Double Click to recommend more like the song you choose.
         </div>
         <div id="footer">
             <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and
@@ -99,7 +100,7 @@
     var source = document.getElementById("mpeg_source");
     audio.volume = 0.5;
 
-    var m = [40, 120, 40, 120],
+    var m = [40, 160, 40, 160],
         w = 1280 - m[1] - m[3],
         h = 800 - m[0] - m[2],
         i = 0,
@@ -136,7 +137,7 @@
         sidebar.trigger("sidebar:close");
     }
 
-    d3.json("/data/recdata.json", function (json) {
+    d3.json("/data/recdata2.json", function (json) {
         {#    alert("{{ recommendation }}");#}
         {#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
         root = json;
@@ -188,12 +189,15 @@
                     playing = d;
                 }
                 if (d !== root) {
-                    toggleSideBar();
-                    toggle(d);
-                    update(d);
                     openSideBar();
                 } else {
                     closeSideBar();
+                }
+            })
+            .on("dblclick", function (d) {
+                if (d !== root) {
+                    toggle(d);
+                    update(d);
                 }
             })
         ;
@@ -203,6 +207,7 @@
                 return d._children ? "lightsteelblue" : "#fff";
             });
         nodeEnter.append('a')
+            .classed('noselect', true)
             .attr('xlink:href', function (d) {
                 return d.url;
             })

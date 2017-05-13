@@ -15,7 +15,7 @@ body {
 }
 
 #body {
-    width: 1280px;
+    width: 100%;
     margin: 0 auto;
     position: relative;
 }
@@ -28,7 +28,7 @@ body {
 #header, #footer {
     z-index: 1;
     display: block;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 300;
     text-shadow: 0 1px 0 #fff;
 }
@@ -60,9 +60,9 @@ body {
 
 #header {
     top: 20px;
-    right: 10px;
+    left: 10px;
     width: 300px;
-    text-align: right;
+    text-align: left;
 }
 
 #footer {
@@ -157,4 +157,13 @@ path.link {
     padding: 30px;
     font-size: 2em;
     text-align: center;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
