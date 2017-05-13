@@ -147,8 +147,10 @@ path.link {
     bottom: 0;
     width: 360px;
     z-index: 2;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background: #f9f9f9;
+    margin-bottom: 80px;
 }
 
 .sidebars > .sidebar {
