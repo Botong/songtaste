@@ -88,6 +88,9 @@
 
 <script>
 
+    var body = $('body');
+    body.loading();
+
     var sidebar = $(".sidebar.right");
     // Sidebar on right side
     sidebar.sidebar({side: "right"});
@@ -144,6 +147,7 @@
     {#    d3.json("/data/recdata.json", function (json) {#}
     {#    alert("{{ recommendation }}");#}
     d3.json("/recommendation/{{ artist_id }}/{{ track_id }}", function (json) {
+        body.loading('stop');
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
@@ -200,8 +204,10 @@
             })
             .on("dblclick", function (d) {
                 if (d !== root) {
+                    body.loading();
                     toggle(d);
                     update(d);
+                    body.loading('stop');
                 }
             })
         ;

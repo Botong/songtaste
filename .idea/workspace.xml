@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13293b3f-d6b8-40d6-b4f4-1f7ffc1a5df6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/partials/head.html" afterPath="$PROJECT_DIR$/templates/partials/head.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/track.html" afterPath="$PROJECT_DIR$/templates/track.html" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
@@ -89,8 +88,8 @@
       <file leaf-file-name="track.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/track.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-206">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="95" />
+            <state relative-caret-position="446">
+              <caret line="209" column="24" lean-forward="false" selection-start-line="209" selection-start-column="24" selection-end-line="209" selection-end-column="24" />
               <folding>
                 <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#!!top" expanded="true" />
               </folding>
@@ -119,10 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>black</find>
-      <find>startPlay</find>
-      <find>isPlaying</find>
-      <find>open</find>
       <find>click</find>
       <find>Header</find>
       <find>hint</find>
@@ -149,6 +144,10 @@
       <find>recommendation</find>
       <find>&gt;&gt;&gt;&gt;</find>
       <find>side</find>
+      <find>#body</find>
+      <find>double</find>
+      <find>load</find>
+      <find>dblc</find>
     </findStrings>
     <replaceStrings>
       <replace>param</replace>
@@ -164,8 +163,8 @@
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/templates/artist.html" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/templates/track.html" />
         <option value="$PROJECT_DIR$/templates/partials/head.html" />
+        <option value="$PROJECT_DIR$/templates/track.html" />
       </list>
     </option>
   </component>
@@ -958,8 +957,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/track.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-206">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="95" />
+        <state relative-caret-position="446">
+          <caret line="209" column="24" lean-forward="false" selection-start-line="209" selection-start-column="24" selection-end-line="209" selection-end-column="24" />
           <folding>
             <element signature="n#style#0;n#audio#0;n#div#0;n#footer#0;n#!!top" expanded="true" />
           </folding>
