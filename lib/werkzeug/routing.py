@@ -775,7 +775,7 @@ class Rule(RuleFactory):
         return True
 
     def match_compare_key(self):
-        """The match compare key for sorting.
+        """The match compare.json key for sorting.
 
         Current implementation:
 
@@ -791,7 +791,7 @@ class Rule(RuleFactory):
         return bool(self.arguments), -len(self._weights), self._weights
 
     def build_compare_key(self):
-        """The build compare key for sorting.
+        """The build compare.json key for sorting.
 
         :internal:
         """

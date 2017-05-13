@@ -1,0 +1,70 @@
+[
+    {
+        "features": {
+            "danceability": 0.59,
+            "mode": 1,
+            "uri": "spotify:track:1ivCIgrYZyE0BvItL4Z8lk",
+            "energy": 0.572,
+            "type": "audio_features",
+            "analysis_url": "https://api.spotify.com/v1/audio-analysis/1ivCIgrYZyE0BvItL4Z8lk",
+            "loudness": -7.658,
+            "valence": 0.459,
+            "liveness": 0.109,
+            "duration_ms": 215147,
+            "instrumentalness": 0,
+            "acousticness": 0.192,
+            "id": "1ivCIgrYZyE0BvItL4Z8lk",
+            "track_href": "https://api.spotify.com/v1/tracks/1ivCIgrYZyE0BvItL4Z8lk",
+            "time_signature": 4,
+            "key": 11,
+            "speechiness": 0.0379,
+            "tempo": 179.989
+        },
+        "artist": {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2elBjNSdBE2Y3f0j1mjrql"
+            },
+            "uri": "spotify:artist:2elBjNSdBE2Y3f0j1mjrql",
+            "type": "artist",
+            "id": "2elBjNSdBE2Y3f0j1mjrql",
+            "href": "https://api.spotify.com/v1/artists/2elBjNSdBE2Y3f0j1mjrql",
+            "name": "周杰倫"
+        },
+        "name": "告白氣球",
+        "preview_url": "https://p.scdn.co/mp3-preview/9b84f01faf1a73ef26372978e8a5cb8b33dd34d7?cid=null"
+    },
+    {
+        "features": {
+            "danceability": 0.458,
+            "mode": 1,
+            "uri": "spotify:track:0N8PEQ33Ba841py3SEV0Wp",
+            "energy": 0.53,
+            "type": "audio_features",
+            "analysis_url": "https://api.spotify.com/v1/audio-analysis/0N8PEQ33Ba841py3SEV0Wp",
+            "loudness": -8.401,
+            "valence": 0.236,
+            "liveness": 0.109,
+            "duration_ms": 280720,
+            "instrumentalness": 0,
+            "acousticness": 0.0969,
+            "id": "0N8PEQ33Ba841py3SEV0Wp",
+            "track_href": "https://api.spotify.com/v1/tracks/0N8PEQ33Ba841py3SEV0Wp",
+            "time_signature": 4,
+            "key": 0,
+            "speechiness": 0.0258,
+            "tempo": 150.142
+        },
+        "artist": {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2elBjNSdBE2Y3f0j1mjrql"
+            },
+            "uri": "spotify:artist:2elBjNSdBE2Y3f0j1mjrql",
+            "type": "artist",
+            "id": "2elBjNSdBE2Y3f0j1mjrql",
+            "href": "https://api.spotify.com/v1/artists/2elBjNSdBE2Y3f0j1mjrql",
+            "name": "周杰倫"
+        },
+        "name": "愛你沒差",
+        "preview_url": "https://p.scdn.co/mp3-preview/6f9e7e71eb20e7671a325a067e536dcb0320fddd?cid=e812542290fe4c5d832907d8b9f5a0cc"
+    }
+]

@@ -119,9 +119,9 @@ class HTTPHeaderDict(MutableMapping):
     RFC 2616. Iteration provides the first case-sensitive key seen for each
     case-insensitive pair.
 
-    Using ``__setitem__`` syntax overwrites fields that compare equal
+    Using ``__setitem__`` syntax overwrites fields that compare.json equal
     case-insensitively in order to maintain ``dict``'s api. For fields that
-    compare equal, instead create a new ``HTTPHeaderDict`` and use ``.add``
+    compare.json equal, instead create a new ``HTTPHeaderDict`` and use ``.add``
     in a loop.
 
     If multiple fields that are equal case-insensitively are passed to the
