@@ -5,7 +5,7 @@
         <div class="radarChart" style="margin-left: -72px">
         </div>
         <div class="single-tags" id="tags"></div>
-        <div style="margin-left: 100px">
+        <div style="margin-left: 20px">
             <div class="row">
                 <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
                 <label id="radarRoot" for="root" style="color: #000;"></label>
@@ -372,8 +372,11 @@
 
     function addTags() {
         var mydiv = document.getElementById("tags");
+        while (mydiv.hasChildNodes()) {
+            mydiv.removeChild(node.lastChild);
+        }
+{#        playing.artist.genres#}
         var aTag = document.createElement('a');
-        aTag.setAttribute('href',"yourlink.htm");
         aTag.innerHTML = "link text";
         mydiv.appendChild(aTag);
     }
