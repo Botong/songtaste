@@ -219,11 +219,11 @@
                 if (startPlay(d.preview_url)) {
                     playing = d;
                     setThumbnail(d);
+                    side_title.innerText = d.name;
+                    side_artist.innerText = d.artist.name;
                     renderRadar();
                 }
                 if (d !== root) {
-                    side_title.innerText = d.name;
-                    side_artist.innerText = d.artist.name;
                     openSideBar();
                 } else {
                     closeSideBar();
