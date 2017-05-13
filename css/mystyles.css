@@ -219,3 +219,61 @@ table.table{
     position: relative;
     background-color: #202020;
 }
+
+input[type="checkbox"]{
+    margin-left: 10px;
+    display: none;
+}
+
+label:before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-left: 17px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	border-radius: 3px;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+}
+
+label#radarCurrent:before  {
+    background-color: #CC333F;
+    color: #ffffff;
+}
+
+label#radarRoot:before {
+    background-color: #00A0B0;
+    color: #ffffff;
+}
+
+label#radarParent:before  {
+    background-color: #EDC951;
+    color: #ffffff;
+    color: #ffffff;
+}
+
+label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 40px;
+	margin-right: 15px;
+	font-size: 15px;
+}
+.checkbox label {
+	margin-bottom: 10px;
+}
+
+ .checkbox label:before {
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked + label:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    text-align: center;
+    line-height: 15px;
+}
