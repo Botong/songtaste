@@ -1,59 +1,84 @@
-
 {% include 'partials/head.html' %}
-
-
+{#<div#}
+{#        style="position: relative; width: 100%; height: 300px;">#}
+{##}
+{#    <!-- ngIf: !hideCoverImageLandscape -->#}
+{#    <div#}
+{#         ng-style="{'background-image' : 'url({{ artist.images[0].url }})'}; width:100%;"#}
+{#         class="ng-scope"#}
+{#            style="background: no-repeat; background-image: url({{ artist.images[0].url }});">#}
+{##}
+{#        <div class="report tooltip_top tooltipstered" ng-class="{active: hoveredImg}"#}
+{#             ng-click="$root.showCoverImageReportPopup=true;$root.showReportCoverImageText1=true;$root.showReportCoverImageText2=false;"></div>#}
+{#        <a ng-class="{active: hoveredImg}" class="pin_btn tooltip_top tooltipstered"#}
+{#           href="http://www.pinterest.com/pin/create/button/?url=http://wikiwand.com/zh/%E9%BD%8A%E6%9F%8F%E6%9E%97%E9%A3%9B%E8%88%B9&amp;media=//upload.wikimedia.org/wikipedia/commons/thumb/b/ba/LZ7_passenger_zeppelin_mod.jpg/1280px-LZ7_passenger_zeppelin_mod.jpg&amp;description=From Wikiwand:%20齊柏林飛船"#}
+{#           target="_blank"></a>#}
+{#    </div><!-- end ngIf: !hideCoverImageLandscape -->#}
+{#</div>#}
 <section id="woz-content">
-  <div class="container">
-    <section class="sec">
-        <h1 class="page-title">{{artist.name}}</h1>
-          <a href="{{artist.external_urls.spotify}}">
-                  {{artist.name}} on Spotify
-                </a>
-{#          <div class="col-md-12">#}
-              {% if tracks %}
-                  <section class="sec tracks">
-                    <h3>Top Tracks</h3>
-{#                    <table class="table table-condensed tracks">#}
-{#                      <thead>#}
-{#                        <tr>#}
-{#                          <th>Track</th>#}
-{#                          <th>Popularity</th>#}
-{#                        </tr>#}
-{#                      </thead>#}
-        <div class="row">
+    <!-- ngIf: !hideCoverImageLandscape -->
+    {#    <div class="cover-art-image cover-art-image-loaded cover-art shadow"#}
+    {#                                     style="background-image: url({{ artist.images[0].url }}); width: 100%; height: 600px">#}
+    {#                                </div>#}
+    <div class="container" style="background: #fafafa; padding: 20px">
+        <section class="sec">
+            <h1 class="page-title">{{ artist.name }}</h1>
+            <a href="{{ artist.external_urls.spotify }}">
+                {{ artist.name }} on Spotify
+            </a>
+
+            {#          <div class="col-md-12">#}
+            {% if tracks %}
+                <section class="sec tracks">
+                    <h3>Select a track you like as a recommendation seed.</h3>
+                    {#                    <table class="table table-condensed tracks">#}
+                    {#                      <thead>#}
+                    {#                        <tr>#}
+                    {#                          <th>Track</th>#}
+                    {#                          <th>Popularity</th>#}
+                    {#                        </tr>#}
+                    {#                      </thead>#}
+                    <div class="row">
                         {% for t in tracks %}
                             <div class="col-md-6 col-sm-12">
-{#                            <tr class="track">#}
-{#                              <td>#}
-                                  <div class="track-info thumbnail" style="border: 1px solid #ddd; padding: 4px; margin-bottom: 20px">
-                                      <a href="/artist/{{ artist.id }}/track/{{t.id}}">
-                                      <img src="{{ t.album.images[0].url }}" style="width: 100%;  display: block;">
-                                          </a>
-                                      <div class="caption" style="padding: 9px">
-                                          <span class="track-name"><a href="/artist/{{ artist.id }}/track/{{t.id}}">{{ t.name }}</a></span>
-                                    <span class="album-name">
+                                {#                            <tr class="track">#}
+                                {#                              <td>#}
+                                <div class="track-info thumbnail"
+                                     style="border: 1px solid #ddd; padding: 4px; margin-bottom: 20px">
+                                    <a href="/artist/{{ artist.id }}/track/{{ t.id }}"
+                                       style="width: 323px; height: 323px; object-position: center; display: inline-block; overflow: hidden">
+                                        <img src="{{ t.album.images[0].url }}"
+                                             style="width: 100%; position: relative; top: 50%; transform: translateY(-50%);">
+                                    </a>
+{#                                    <div#}
+{#                                         style="width: 323px; height: 323px; overflow:hidden; background-image: url({{ t.album.images[0].url }}); ">#}
+{#                                    </div>#}
+                                    <div class="caption" style="padding: 9px">
+                                        <span class="track-name"><a
+                                                href="/artist/{{ artist.id }}/track/{{ t.id }}">{{ t.name }}</a></span>
+                                        <span class="album-name">
                                           {{ t.album.name }}
                                     </span>
-                                  <audio controls loop preload="auto" style="width: 100%; margin-top: 5px">
-                                      <source src="{{ t.preview_url }}" type="audio/mpeg">
-                                  </audio>
-                                  </div>
-                                      </div>
-{#                                  <audio src="{{ t.preview_url }}" preload="auto" style="width: 100%"></audio>#}
-{#                              </td>#}
-{#                              <td class="number">{{ t.popularity }}</td>#}
-{#                            </tr>#}
+                                        <audio controls preload="auto" style="width: 100%; margin-top: 6px">
+                                            <source src="{{ t.preview_url }}" type="audio/mpeg">
+                                        </audio>
+                                    </div>
+                                </div>
+                                {#                                  <audio src="{{ t.preview_url }}" preload="auto" style="width: 100%"></audio>#}
+                                {#                              </td>#}
+                                {#                              <td class="number">{{ t.popularity }}</td>#}
+                                {#                            </tr>#}
                             </div>
                         {% endfor %}
-{#                    </table>#}
+                        {#                    </table>#}
 
-        </div>
-                  </section>
-              {% endif %}
-{#            </div>#}
+                    </div>
+                </section>
+            {% endif %}
+            {#            </div>#}
 
 
-    </section>
-  </div>
+        </section>
+    </div>
 </section>
 {% include 'partials/foot.html' %}

@@ -16,19 +16,21 @@
 {#    <script type="text/javascript" src="js/d3.v3.min.js"></script>#}
 
     <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap-select.min.css')}}">
-
     <link rel="stylesheet" href="{{url_for('static', filename='../css/narrow-jumbotron.css')}}">
 <<<<<<< HEAD
-
-    <!-- D3.js -->
 =======
+
+>>>>>>> 0fa86bcaf8be7534998ccd8ecabf26b4f198b3f8
     <link rel="stylesheet" href="{{url_for('static', filename='../css/jquery.loading.min.css')}}">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
     <!-- D3.js -->
 {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>#}
->>>>>>> 67ab306a5c327191b953d562bf517ba7e7168cbd
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fa86bcaf8be7534998ccd8ecabf26b4f198b3f8
     <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
 {#    <script src="{{url_for('static', filename='../js/audiojs/audio.min.js')}}"></script>#}
     <script src="{{url_for('static', filename='../js/bootstrap.min.js')}}"></script>
