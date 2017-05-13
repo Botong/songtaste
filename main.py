@@ -96,11 +96,17 @@ def poster():
     return template.render()
 
 
-def build_tree(tree, song_list, features, artists, index, depth, max_num):
+def build_tree(tree, song_list, features, artists, index, depth, max_num, father):
     tree['name'] = song_list[index]['name']
     tree['artist'] = artists[index]
     tree['features'] = features[index]
     tree['preview_url'] = song_list[index]['preview_url']
+    if father is not None:
+        tmp = father.copy()
+        tmp.pop('children', None)
+        tree['father'] = tmp
+    else:
+        tree['father'] = None
 
     count = 1
 
@@ -112,7 +118,7 @@ def build_tree(tree, song_list, features, artists, index, depth, max_num):
             if count >= max_num or index + count >= len(song_list):
                 return count
             node = {}
-            count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3)
+            count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3, tree)
             tree['children'].append(node)
 
     return count
@@ -120,7 +126,7 @@ def build_tree(tree, song_list, features, artists, index, depth, max_num):
 
 def generate_recommendation_tree(song_list, features, artists):
     tree = {}
-    build_tree(tree, song_list, features, artists, 0, 0, len(song_list))
+    build_tree(tree, song_list, features, artists, 0, 0, len(song_list), None)
     return tree
 
 
@@ -143,6 +149,7 @@ def recommendation(artist_id, track_id):
     features = get_several_track_features(track_ids)['audio_features']
 
     tree = generate_recommendation_tree(song_list, features, artists)
+    print json.dumps(tree)
     #
     return json.dumps(tree)
     # return json.dumps(recommend)
