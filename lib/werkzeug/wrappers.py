@@ -1762,11 +1762,11 @@ class WWWAuthenticateMixin(object):
     def www_authenticate(self):
         """The `WWW-Authenticate` header in a parsed form."""
         def on_update(www_auth):
-            if not www_auth and 'www-authenticate' in self.headers:
-                del self.headers['www-authenticate']
+            if not www_auth and 'www-get_token' in self.headers:
+                del self.headers['www-get_token']
             elif www_auth:
                 self.headers['WWW-Authenticate'] = www_auth.to_header()
-        header = self.headers.get('www-authenticate')
+        header = self.headers.get('www-get_token')
         return parse_www_authenticate_header(header, on_update)
 
 

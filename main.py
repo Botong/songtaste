@@ -76,9 +76,11 @@ def artist(id):
 def track(artist_id, track_id):
     artist_info = get_artist(artist_id)
     features = get_track_audio_features(track_id)
+    recommend = get_recommendation(track_id, artist_id)
     html = render_template('track.html',
                            features=features,
-                           artist=artist_info)
+                           artist=artist_info,
+                           recommendation=recommend)
     return html
 
 
@@ -98,6 +100,53 @@ def usertest():
 def poster():
     template = JINJA_ENVIRONMENT.get_template('templates/Poster.html')
     return template.render()
+
+
+def build_tree(tree, song_list, features, index, depth, max_num):
+    tree['name'] = song_list[index]['name']
+    tree['artist'] = song_list[index]['artists'][0]
+    tree['features'] = features[index]
+    tree['preview_url'] = song_list[index]['preview_url']
+
+    count = 1
+
+    if count >= max_num or index + count >= len(song_list):
+        return count
+    if depth < 4:
+        tree['children'] = []
+        for i in range(3):
+            if count >= max_num or index + count >= len(song_list):
+                return count
+            node = {}
+            count += build_tree(node, song_list, features, index + count, depth+1, max_num/3)
+            tree['children'].append(node)
+
+    return count
+
+
+def generate_recommendation_tree(song_list, features):
+    tree = {}
+    build_tree(tree, song_list, features, 0, 0, len(song_list))
+    return tree
+
+
+@app.route('/recommendation/<artist_id>/<track_id>')
+def recommendation(artist_id, track_id):
+    # artist_info = get_artist(artist_id)
+    # features = get_track_audio_features(track_id)
+    song_list = get_recommendation(track_id, artist_id)['tracks']
+    song_list.insert(0, get_a_track(track_id))
+
+    track_ids = []
+    for t in song_list:
+        track_ids.append(t['id'])
+
+    features = get_several_track_features(track_ids)['audio_features']
+
+    tree = generate_recommendation_tree(song_list, features)
+    #
+    return json.dumps(tree)
+    # return json.dumps(recommend)
 
 
 @app.route('/teamInfo')

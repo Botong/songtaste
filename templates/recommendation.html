@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://charts.animateddata.co.uk/datavistree/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <!-- <script async="" src="js/analytics.js"></script> -->
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <!-- <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-55956641-1', 'auto');
+    ga('send', 'pageview');
+    </script> -->
+</head>
+<body>
+<div id="body">
+    <div id="header">
+        Tools and Libraries for Building Web-based Data Visualisations
+    </div>
+    <div id="footer">
+        <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and is
+            for a presentation by <a href="http://animateddata.co.uk/">Peter Cook</a> at <a
+                    href="http://www.meetup.com/Data-Visualisation-Brighton/">Data Visualisation Brighton</a>.</p>
+            <p>It is not comprehensive. If you feel there's a glaring omission please <a
+                    href="http://animateddata.co.uk/contact/">contact me</a>. (For a more comprehensive list try Andy
+                Kirk's <a href="http://www.visualisingdata.com/index.php/resources/">Visualising Data</a>.)</p>
+            <p>This is an adaptation of Mike Bostock's D3 tree layout <a
+                    href="http://mbostock.github.io/d3/talk/20111018/tree.html">example</a>. Thanks Mike :)</p>
+            <p>Click a circle to expand or collapse. Grey indicates not free.</p>
+            <p>I'm available <a href="http://animateddata.co.uk/contact">for hire</a>.</p>
+            <p><a href="http://animateddata.co.uk/training">Find out</a> about my <a
+                    href="http://animateddata.co.uk/training">data visualisation workshops</a></p>.
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var m = [40, 120, 40, 120],
+        w = 1280 - m[1] - m[3],
+        h = 800 - m[0] - m[2],
+        i = 0,
+        root;
+    var tree = d3.layout.tree()
+        .size([h, w]);
+    var diagonal = d3.svg.diagonal()
+        .projection(function (d) {
+            return [d.y, d.x];
+        });
+    var vis = d3.select("#body").append("svg:svg")
+        .attr("width", w + m[1] + m[3])
+        .attr("height", h + m[0] + m[2])
+        .append("svg:g")
+        .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+{#    d3.json("data/data.json", function (json) {#}
+    d3.json("{{ recommendation }}", function (json) {
+        root = json;
+        root.x0 = h / 2;
+        root.y0 = 0;
+        console.log(json);
+        function toggleAll(d) {
+            if (d.children) {
+                d.children.forEach(toggleAll);
+                toggle(d);
+            }
+        }
+
+        // Initialize the display to show a few nodes.
+//         root.children.forEach(toggleAll);
+//         toggle(root._children[1]);
+//         toggle(root._children[1]._children[2]);
+//         toggle(root._children[9]);
+//         toggle(root._children[9]._children[0]);
+{#        toggleAll(root);#}
+{#        update(root);#}
+    });
+    function update(source) {
+        var duration = d3.event && d3.event.altKey ? 5000 : 500;
+        // Compute the new tree layout.
+        var nodes = tree.nodes(root).reverse();
+        // Normalize for fixed-depth.
+        nodes.forEach(function (d) {
+            d.y = d.depth * 180;
+        });
+        // Update the nodes…
+        var node = vis.selectAll("g.node")
+            .data(nodes, function (d) {
+                return d.id || (d.id = ++i);
+            });
+        // Enter any new nodes at the parent's previous position.
+        var nodeEnter = node.enter().append("svg:g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + source.y0 + "," + source.x0 + ")";
+            })
+            .on("click", function (d) {
+                toggle(d);
+                update(d);
+            })
+        ;
+        nodeEnter.append("svg:circle")
+            .attr("r", 1e-6)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            });
+        nodeEnter.append('a')
+            .attr('xlink:href', function (d) {
+                return d.url;
+            })
+            .append("svg:text")
+            .attr("x", function (d) {
+                return d.children || d._children ? -10 : 10;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", function (d) {
+                return d.children || d._children ? "end" : "start";
+            })
+            .text(function (d) {
+                return d.name;
+            })
+            .style('fill', function (d) {
+                return d.free ? 'black' : '#999';
+            })
+            .style("fill-opacity", 1e-6);
+        nodeEnter.append("svg:title")
+            .text(function (d) {
+                return d.description;
+            });
+        // Transition nodes to their new position.
+        var nodeUpdate = node.transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + d.y + "," + d.x + ")";
+            });
+        nodeUpdate.select("circle")
+            .attr("r", 6)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            });
+        nodeUpdate.select("text")
+            .style("fill-opacity", 1);
+        // Transition exiting nodes to the parent's new position.
+        var nodeExit = node.exit().transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + source.y + "," + source.x + ")";
+            })
+            .remove();
+        nodeExit.select("circle")
+            .attr("r", 1e-6);
+        nodeExit.select("text")
+            .style("fill-opacity", 1e-6);
+        // Update the links…
+        var link = vis.selectAll("path.link")
+            .data(tree.links(nodes), function (d) {
+                return d.target.id;
+            });
+        // Enter any new links at the parent's previous position.
+        link.enter().insert("svg:path", "g")
+            .attr("class", "link")
+            .attr("d", function (d) {
+                var o = {x: source.x0, y: source.y0};
+                return diagonal({source: o, target: o});
+            })
+            .transition()
+            .duration(duration)
+            .attr("d", diagonal);
+        // Transition links to their new position.
+        link.transition()
+            .duration(duration)
+            .attr("d", diagonal);
+        // Transition exiting nodes to the parent's new position.
+        link.exit().transition()
+            .duration(duration)
+            .attr("d", function (d) {
+                var o = {x: source.x, y: source.y};
+                return diagonal({source: o, target: o});
+            })
+            .remove();
+        // Stash the old positions for transition.
+        nodes.forEach(function (d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+        });
+    }
+    // Toggle children.
+    function toggle(d) {
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+        } else {
+            d.children = d._children;
+            d._children = null;
+        }
+    }
+</script>
+
+</body>
+<div></div>
+</html>
