@@ -45,10 +45,15 @@
                                 {#                              <td>#}
                                 <div class="track-info thumbnail"
                                      style="border: 1px solid #ddd; padding: 4px; margin-bottom: 20px">
+
+                                    {% if t.album.images[0].height > t.album.images[0].width %}
+                                        {% set direction = "portrait" %}
+                                    {% else %}
+                                        {% set direction = "landscape" %}
+                                    {% endif %}
                                     <a href="/artist/{{ artist.id }}/track/{{ t.id }}"
                                        style="width: 323px; height: 323px; object-position: center; display: inline-block; overflow: hidden">
-                                        <img src="{{ t.album.images[0].url }}"
-                                             style="width: 100%; position: relative; top: 50%; transform: translateY(-50%);">
+                                        <img class="{{ direction }}" src="{{ t.album.images[0].url }}">
                                     </a>
 {#                                    <div#}
 {#                                         style="width: 323px; height: 323px; overflow:hidden; background-image: url({{ t.album.images[0].url }}); ">#}
