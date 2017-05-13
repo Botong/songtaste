@@ -155,6 +155,7 @@
             .on("click", function (d) {
                 if (startPlay(d.preview_url)) {
                     playing = d;
+                    renderRadar();
                 }
                 if (d !== root) {
                     openSideBar();
@@ -277,57 +278,46 @@
         }
     }
 
-    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-    var margin = {top: 100, right: 100, bottom: 100, left: 100},
-        width = 250;
-        height = 250;
+    function renderRadar() {
+        /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+        var margin = {top: 100, right: 100, bottom: 100, left: 100},
+            width = 250;
+            height = 250;
 
-    var song1 = null;
-    var song2 = null;
+        var data = setupRadar(playing.features, playing.father.features);
+         //////////////////////////////////////////////////////////////
+        //////////////////// Draw the Chart //////////////////////////
+        //////////////////////////////////////////////////////////////
+        var color = d3.scale.ordinal()
+            .range(["#EDC951","#CC333F","#00A0B0"]);
 
-    jQuery.ajax({
-      dataType: "json",
-      url: "/data/test.json",
-      async: false,
-      success: function(data){
-          song1 = data[0].features;
-          song2 = data[1].features;
-      }
-    });
+        var radarChartOptions = {
+          w: width,
+          h: height,
+          margin: margin,
+          maxValue: 0.5,
+          levels: 5,
+          roundStrokes: true,
+          color: color
+        };
+        //Call function to draw the Radar chart
+        RadarChart(".radarChart", data, radarChartOptions);
+    }
 
-    var data = [];
     function setupRadar(d1, d2) {
-        input = [d1, d2];
-        for (i = 0; i < 2; i++) {
-            data.push([{axis:"acousticness",value:input[i].acousticness},
+        var input = [d1, d2];
+        var output = [];
+        for (var i = 0; i < 2; i++) {
+            output.push([{axis:"acousticness",value:input[i].acousticness},
                 {axis:"danceability",value:input[i].danceability},
                 {axis:"energy",value:input[i].energy},
                 {axis:"instrumentalness",value:input[i].instrumentalness},
                 {axis:"liveness",value:input[i].liveness},
                 {axis:"loudness",value:(input[i].loudness + 60)/60},
-                {axis:"speechiness",value:input[i].speechiness},
+{#                {axis:"speechiness",value:input[i].speechiness},#}
                 {axis:"tempo",value:input[i].tempo/200},
                 {axis:"valence",value:input[i].valence}])
         }
+        return output;
     }
-
-    setupRadar(song1, song2);
-
-    //////////////////////////////////////////////////////////////
-    //////////////////// Draw the Chart //////////////////////////
-    //////////////////////////////////////////////////////////////
-    var color = d3.scale.ordinal()
-        .range(["#EDC951","#CC333F","#00A0B0"]);
-
-    var radarChartOptions = {
-      w: width,
-      h: height,
-      margin: margin,
-      maxValue: 0.5,
-      levels: 5,
-      roundStrokes: true,
-      color: color
-    };
-    //Call function to draw the Radar chart
-    RadarChart(".radarChart", data, radarChartOptions);
 </script>
