@@ -283,10 +283,9 @@
             width = 250;
         height = 250;
 
-        var data = setupRadar(playing.features, playing.father.features);
-        //////////////////////////////////////////////////////////////
-        //////////////////// Draw the Chart //////////////////////////
-        //////////////////////////////////////////////////////////////
+        var data = setupRadar(root.features, playing.features, playing.father.features);
+
+        // EDC951 seed, CC333F current, 00A0B0 parent
         var color = d3.scale.ordinal()
             .range(["#EDC951", "#CC333F", "#00A0B0"]);
 
@@ -307,8 +306,8 @@
         return (a > b) ? a : b;
     }
 
-    function setupRadar(d1, d2) {
-        var input = [d1, d2];
+    function setupRadar(d0, d1, d2) {
+        var input = [d0, d1, d2];
         var output = [];
         var top = {};
 {#        top['acousticness'] = max(input[0].acousticness, input[1].acousticness);#}
@@ -334,7 +333,7 @@
 {#        }#}
 
 
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 3; i++) {
             output.push([
 {#                {axis: "acousticness", value: input[i].acousticness},#}
                 {axis: "danceability", value: input[i].danceability},

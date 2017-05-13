@@ -203,7 +203,7 @@ def recommendation(artist_id, track_id):
         song_list[i]['artist'] = artists[i]
         song_list[i]['features'] = features[i]
 
-    song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: -euc_dist(s, song_list[0]))
+    song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: euc_dist(s, song_list[0]))
 
     # tree = generate_recommendation_tree(song_list, features, artists)
     tree = generate_recommendation_tree(song_list)
