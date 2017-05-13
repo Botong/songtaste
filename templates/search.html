@@ -58,8 +58,12 @@
                                 {% if item.images | length > 1 %}
                                     {% set imageUrl = item.images[1].url %}
                                 {% endif %}
-                                <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable"
-                                     style="background-image: url({{ imageUrl }})">
+{#                                <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable"#}
+{#                                     style="background-image: url({{ imageUrl }})">#}
+{#                                </div>#}
+                                <div class="cover-art-image cover-art-image-loaded cover-art shadow rounded actionable" style="width: 323px; height: 323px; object-position: center; display: inline-block; overflow: hidden">
+                                    <img src="{{ imageUrl }}"
+                                         style="height: 100%; position: relative; left: 50%; transform: translateX(-50%);">
                                 </div>
                             </a>
                             <div class="track-info">
