@@ -65,9 +65,9 @@
     <div style="margin-left: 32px; margin-top: -16px; width: 64px; height: 64px; object-position: center; display: inline-block; overflow: hidden; float: left;">
         <img id="thumbnail" class="portrait" src="/img/artist.png">
     </div>
-    <div style="position: absolute; margin-left: 100px; margin-top: -9px; width: 256px;">
+    <div style="position: absolute; float: left; margin-left: 100px; margin-top: -9px; width: 256px;">
         <h5 class="limit-text" id="track_name"></h5>
-        <h6 id="artist_name" style="margin-top: 2em"></h6>
+        <h6 id="artist_name"></h6>
     </div>
     <div class="container">
         {#        <a href="#" class="btn btn-primary" data-action="toggle" data-side="right"><span>Toggle Right</span></a>#}
@@ -155,12 +155,12 @@
         }
 
 
-        var songname = song.name;
-        if (song.name.length > 28) {
-            songname = song.name.substr(0, 24).trim() + "...";
-        }
+{#        var songname = song.name;#}
+{#        if (song.name.length > 28) {#}
+{#            songname = song.name.substr(0, 24).trim() + "...";#}
+{#        }#}
 
-        track_name.innerText = songname;
+        track_name.innerText = song.name;
         artist_name.innerText = song.artist.name;
     }
 
@@ -245,6 +245,7 @@
             });
         nodeEnter.append('a')
             .classed('noselect', true)
+            .style('width', "50px")
             .attr('xlink:href', function (d) {
                 return d.url;
             })
@@ -257,11 +258,12 @@
                 return d.children || d._children ? "end" : "start";
             })
             .text(function (d) {
-                if (d.name.length > 28) {
-                    return d.name.substr(0, 25).trim() + "...";
-                }
+{#                if (d.name.length > 28) {#}
+{#                    return d.name.substr(0, 25).trim() + "...";#}
+{#                }#}
                 return d.name;
             })
+            .classed("limit-text", true)
             .style('fill', function (d) {
                 {#                if (d.preview_url === null) {#}
                 {#                    return '#999';#}
