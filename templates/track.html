@@ -29,7 +29,7 @@
     <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>
     <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>
-{#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
     <!--
     <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>
@@ -140,9 +140,9 @@
         sidebar.trigger("sidebar:close");
     }
 
-    d3.json("/data/recdata.json", function (json) {
-        {#    alert("{{ recommendation }}");#}
-        {#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
+    {#    d3.json("/data/recdata.json", function (json) {#}
+    {#    alert("{{ recommendation }}");#}
+    d3.json("/recommendation/{{ artist_id }}/{{ track_id }}", function (json) {
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
