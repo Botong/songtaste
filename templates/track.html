@@ -1,43 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SongTaste</title>
-    <meta http-equiv="cleartype" content="on">
-    <meta name="MobileOptimized" content="320">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../css/mystyles.css') }}">
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>SongTaste</title>#}
+{#    <meta http-equiv="cleartype" content="on">#}
+{#    <meta name="MobileOptimized" content="320">#}
+{#    <meta name="HandheldFriendly" content="True">#}
+{#    <meta name="apple-mobile-web-app-capable" content="yes">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">#}
+{#    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}">#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap.css') }}">#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/mystyles.css') }}">#}
     {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
     {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ url_for('static', filename='../css/style.css') }}">
     <!-- <script async="" src="js/analytics.js"></script> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">
+=======
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/style.css') }}">#}
+{#    <!-- <script async="" src="js/analytics.js"></script> -->#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">#}
+{##}
+>>>>>>> 67ab306a5c327191b953d562bf517ba7e7168cbd
     {#    <link rel="stylesheet" href="../css/normalize.css">#}
     {#    <link rel="stylesheet" href="../css/e.css">#}
     {#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
     {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>#}
     {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
     {#    <script src="../js/d3-tip.js"></script>#}
-
-    <script src="{{ url_for('static', filename='../js/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>
-{#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
-    <!--
-    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>
- -->
-    <script src="{{ url_for('static', filename='../js/d3.v3.min.js') }}"></script>
-</head>
-<body>
-
-{% include 'partials/header.html' %}
+{##}
+{#    <script src="{{ url_for('static', filename='../js/jquery.js') }}"></script>#}
+{#    <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>#}
+{#    <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>#}
+{#    <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
+{#    <!--#}
+{#    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>#}
+{#    <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>#}
+{# -->#}
+{#    <script src="{{ url_for('static', filename='../js/d3.v3.min.js') }}"></script>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% include 'partials/header.html' %}#}
+{% include 'partials/head.html' %}
 
 <div class="sidebars">
     <div class="sidebar right">
@@ -83,6 +92,9 @@
 </footer>
 
 <script>
+
+    var body = $('body');
+    body.loading();
 
     var sidebar = $(".sidebar.right");
     // Sidebar on right side
@@ -137,9 +149,10 @@
         sidebar.trigger("sidebar:close");
     }
 
-    d3.json("/data/recdata.json", function (json) {
-        {#    alert("{{ recommendation }}");#}
-        {#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
+    {#    d3.json("/data/recdata.json", function (json) {#}
+    {#    alert("{{ recommendation }}");#}
+    d3.json("/recommendation/{{ artist_id }}/{{ track_id }}", function (json) {
+        body.loading('stop');
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
@@ -196,8 +209,10 @@
             })
             .on("dblclick", function (d) {
                 if (d !== root) {
+                    body.loading();
                     toggle(d);
                     update(d);
+                    body.loading('stop');
                 }
             })
         ;
@@ -306,4 +321,8 @@
             d._children = null;
         }
     }
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 67ab306a5c327191b953d562bf517ba7e7168cbd

@@ -74,13 +74,12 @@ def artist(id):
 
 @app.route('/artist/<artist_id>/track/<track_id>')
 def track(artist_id, track_id):
-    artist_info = get_artist(artist_id)
-    features = get_track_audio_features(track_id)
-    recommend = get_recommendation(track_id, artist_id)
+    # artist_info = get_artist(artist_id)
+    # features = get_track_audio_features(track_id)
+    # recommend = get_recommendation(track_id, artist_id)
     html = render_template('track.html',
-                           features=features,
-                           artist=artist_info,
-                           recommendation=recommend)
+                           artist_id=artist_id,
+                           track_id=track_id)
     return html
 
 
