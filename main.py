@@ -3,6 +3,7 @@ import os
 import jinja2
 from flask import render_template, request, redirect, url_for, Flask
 from spotify import *
+import math
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -96,10 +97,45 @@ def poster():
     return template.render()
 
 
-def build_tree(tree, song_list, features, artists, index, depth, max_num, father):
+# def build_tree(tree, song_list, features, artists, index, depth, max_num, father):
+#     tree['name'] = song_list[index]['name']
+#     tree['artist'] = artists[index]
+#     tree['features'] = features[index]
+#     tree['preview_url'] = song_list[index]['preview_url']
+#     if father is not None:
+#         tmp = father.copy()
+#         tmp.pop('children', None)
+#         tmp.pop('father', None)
+#         tree['father'] = tmp
+#     else:
+#         tree['father'] = None
+#
+#     count = 1
+#
+#     if count >= max_num or index + count >= len(song_list):
+#         return count
+#     if depth < 4:
+#         tree['children'] = []
+#         for i in range(3):
+#             if count >= max_num or index + count >= len(song_list):
+#                 return count
+#             node = {}
+#             count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3, tree)
+#             tree['children'].append(node)
+#
+#     return count
+
+
+# def generate_recommendation_tree(song_list, features, artists):
+#     tree = {}
+#     build_tree(tree, song_list, features, artists, 0, 0, len(song_list), None)
+#     return tree
+
+
+def build_tree(tree, song_list, index, depth, max_num, father):
     tree['name'] = song_list[index]['name']
-    tree['artist'] = artists[index]
-    tree['features'] = features[index]
+    tree['artist'] = song_list[index]['artist']
+    tree['features'] = song_list[index]['features']
     tree['preview_url'] = song_list[index]['preview_url']
     if father is not None:
         tmp = father.copy()
@@ -119,16 +155,29 @@ def build_tree(tree, song_list, features, artists, index, depth, max_num, father
             if count >= max_num or index + count >= len(song_list):
                 return count
             node = {}
-            count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3, tree)
+            count += build_tree(node, song_list, index + count, depth + 1, max_num / 3, tree)
             tree['children'].append(node)
 
     return count
 
 
-def generate_recommendation_tree(song_list, features, artists):
+def generate_recommendation_tree(song_list):
     tree = {}
-    build_tree(tree, song_list, features, artists, 0, 0, len(song_list), None)
+    build_tree(tree, song_list, 0, 0, len(song_list), None)
     return tree
+
+
+def euc_dist(s1, s2):
+    a = s1['features']
+    b = s2['features']
+    dist = 0.0
+    dist += (a['loudness'] - b['loudness']) ** 2 \
+            + (a['tempo'] / 200 - b['tempo'] / 200) ** 2 \
+            + (a['valence'] - b['valence']) ** 2 \
+            + (a['danceability'] - b['danceability']) ** 2 \
+            + (a['energy'] - b['energy']) ** 2 \
+            + (a['liveness'] - b['liveness']) ** 2
+    return math.sqrt(dist)
 
 
 @app.route('/recommendation/<artist_id>/<track_id>')
@@ -149,8 +198,15 @@ def recommendation(artist_id, track_id):
 
     features = get_several_track_features(track_ids)['audio_features']
 
-    tree = generate_recommendation_tree(song_list, features, artists)
-    print json.dumps(tree)
+    for i in range(len(song_list)):
+        song_list[i]['artist'] = artists[i]
+        song_list[i]['features'] = features[i]
+
+    song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: -euc_dist(s, song_list[0]))
+
+    # tree = generate_recommendation_tree(song_list, features, artists)
+    tree = generate_recommendation_tree(song_list)
+    # print json.dumps(tree)
     #
     return json.dumps(tree)
     # return json.dumps(recommend)
