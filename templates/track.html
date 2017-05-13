@@ -1,56 +1,10 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>SongTaste</title>#}
-{#    <meta http-equiv="cleartype" content="on">#}
-{#    <meta name="MobileOptimized" content="320">#}
-{#    <meta name="HandheldFriendly" content="True">#}
-{#    <meta name="apple-mobile-web-app-capable" content="yes">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">#}
-{#    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}">#}
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap.css') }}">#}
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/mystyles.css') }}">#}
-    {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
-    {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
-<<<<<<< HEAD
-    <link rel="stylesheet" href="{{ url_for('static', filename='../css/style.css') }}">
-    <!-- <script async="" src="js/analytics.js"></script> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">
-=======
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/style.css') }}">#}
-{#    <!-- <script async="" src="js/analytics.js"></script> -->#}
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">#}
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">#}
-{##}
->>>>>>> 67ab306a5c327191b953d562bf517ba7e7168cbd
-    {#    <link rel="stylesheet" href="../css/normalize.css">#}
-    {#    <link rel="stylesheet" href="../css/e.css">#}
-    {#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>#}
-    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
-    {#    <script src="../js/d3-tip.js"></script>#}
-{##}
-{#    <script src="{{ url_for('static', filename='../js/jquery.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>#}
-    {#    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>#}
-{#    <!--#}
-{#    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>#}
-{#    <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>#}
-{# -->#}
-{#    <script src="{{ url_for('static', filename='../js/d3.v3.min.js') }}"></script>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#{% include 'partials/header.html' %}#}
+
 {% include 'partials/head.html' %}
 
 <div class="sidebars">
     <div class="sidebar right">
-        {% include 'partials/radar.html' %}
+        <div class="radarChart"></div>
+        <script src="{{url_for('static', filename='../js/radarChart.js')}}"></script>
     </div>
 </div>
 
@@ -151,6 +105,7 @@
 
     {#    d3.json("/data/recdata.json", function (json) {#}
     {#    alert("{{ recommendation }}");#}
+
     d3.json("/recommendation/{{ artist_id }}/{{ track_id }}", function (json) {
         body.loading('stop');
         root = json;
@@ -321,8 +276,58 @@
             d._children = null;
         }
     }
-<<<<<<< HEAD
+
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+        width = 250;
+        height = 250;
+
+    var song1 = null;
+    var song2 = null;
+
+    jQuery.ajax({
+      dataType: "json",
+      url: "/data/test.json",
+      async: false,
+      success: function(data){
+          song1 = data[0].features;
+          song2 = data[1].features;
+      }
+    });
+
+    var data = []
+    function setupRadar(d1, d2) {
+        input = [d1, d2]
+        for (i = 0; i < 2; i++) {
+            data.push([{axis:"acousticness",value:input[i].acousticness},
+                {axis:"danceability",value:input[i].danceability},
+                {axis:"energy",value:input[i].energy},
+                {axis:"instrumentalness",value:input[i].instrumentalness},
+                {axis:"liveness",value:input[i].liveness},
+                {axis:"loudness",value:(input[i].loudness + 60)/60},
+                {axis:"speechiness",value:input[i].speechiness},
+                {axis:"tempo",value:input[i].tempo/200},
+                {axis:"valence",value:input[i].valence}])
+        }
+    }
+
+    setupRadar(song1, song2);
+
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+    var color = d3.scale.ordinal()
+        .range(["#EDC951","#CC333F","#00A0B0"]);
+
+    var radarChartOptions = {
+      w: width,
+      h: height,
+      margin: margin,
+      maxValue: 0.5,
+      levels: 5,
+      roundStrokes: true,
+      color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart(".radarChart", data, radarChartOptions);
 </script>
-=======
-</script>
->>>>>>> 67ab306a5c327191b953d562bf517ba7e7168cbd
