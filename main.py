@@ -101,9 +101,9 @@ def poster():
     return template.render()
 
 
-def build_tree(tree, song_list, features, index, depth, max_num):
+def build_tree(tree, song_list, features, artists, index, depth, max_num):
     tree['name'] = song_list[index]['name']
-    tree['artist'] = song_list[index]['artists'][0]
+    tree['artist'] = artists[index]
     tree['features'] = features[index]
     tree['preview_url'] = song_list[index]['preview_url']
 
@@ -117,15 +117,15 @@ def build_tree(tree, song_list, features, index, depth, max_num):
             if count >= max_num or index + count >= len(song_list):
                 return count
             node = {}
-            count += build_tree(node, song_list, features, index + count, depth+1, max_num/3)
+            count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3)
             tree['children'].append(node)
 
     return count
 
 
-def generate_recommendation_tree(song_list, features):
+def generate_recommendation_tree(song_list, features, artists):
     tree = {}
-    build_tree(tree, song_list, features, 0, 0, len(song_list))
+    build_tree(tree, song_list, features, artists, 0, 0, len(song_list))
     return tree
 
 
@@ -137,12 +137,17 @@ def recommendation(artist_id, track_id):
     song_list.insert(0, get_a_track(track_id))
 
     track_ids = []
+    artist_ids = []
     for t in song_list:
         track_ids.append(t['id'])
+        artist_ids.append(t['artists'][0]['id'])
+
+    artists = get_several_artists(artist_ids[:50])['artists']
+    artists += get_several_artists(artist_ids[50:])['artists']
 
     features = get_several_track_features(track_ids)['audio_features']
 
-    tree = generate_recommendation_tree(song_list, features)
+    tree = generate_recommendation_tree(song_list, features, artists)
     #
     return json.dumps(tree)
     # return json.dumps(recommend)
