@@ -132,6 +132,19 @@ def poster():
 #     return tree
 
 
+def find_most_similar(cur, list, start):
+    min_dist = euc_dist(cur, list[start])
+    min_idx = start
+
+    for i in range(start + 1, len(list)):
+        new_dist = euc_dist(cur, list[i])
+        if new_dist < min_dist:
+            min_dist = new_dist
+            min_idx = i
+
+    return min_idx
+
+
 def build_tree(tree, song_list, index, depth, max_num, father):
     tree['name'] = song_list[index]['name']
     tree['artist'] = song_list[index]['artist']
@@ -151,10 +164,12 @@ def build_tree(tree, song_list, index, depth, max_num, father):
         return count
     if depth < 4:
         tree['children'] = []
-        for i in range(3):
+        for _ in range(3):
             if count >= max_num or index + count >= len(song_list):
                 return count
             node = {}
+            new_index = find_most_similar(tree, song_list, index+count)
+            song_list[index + count], song_list[new_index] = song_list[new_index], song_list[index + count]
             count += build_tree(node, song_list, index + count, depth + 1, max_num / 3, tree)
             tree['children'].append(node)
 
@@ -202,7 +217,7 @@ def recommendation(artist_id, track_id):
         song_list[i]['artist'] = artists[i]
         song_list[i]['features'] = features[i]
 
-    song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: -euc_dist(s, song_list[0]))
+    song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: euc_dist(s, song_list[0]))
 
     # tree = generate_recommendation_tree(song_list, features, artists)
     tree = generate_recommendation_tree(song_list)
