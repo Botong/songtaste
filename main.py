@@ -16,11 +16,6 @@ app.config['DEBUG'] = True
 app = Flask(__name__, template_folder='templates')
 
 
-# @app.route('/')
-# def index():
-#     template = JINJA_ENVIRONMENT.get_template('templates/index.html')
-#     return template.render()
-
 @app.route('/')
 def homepage():
     html = render_template('homepage.html')
