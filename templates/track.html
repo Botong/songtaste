@@ -375,10 +375,26 @@
         while (mydiv.hasChildNodes()) {
             mydiv.removeChild(node.lastChild);
         }
-{#        playing.artist.genres#}
-        var aTag = document.createElement('a');
-        aTag.innerHTML = "link text";
-        mydiv.appendChild(aTag);
+        var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
+        for(var i=0; i<tags.length; i++) {
+            var aTag = document.createElement('a');
+            aTag.innerHTML = tags[i];
+            mydiv.appendChild(aTag);
+        }
+    }
+
+    function intersection_destructive(a, b) {
+      var result = [];
+      while( a.length > 0 && b.length > 0 ) {
+         if      (a[0] < b[0] ){ a.shift(); }
+         else if (a[0] > b[0] ){ b.shift(); }
+         else /* they're equal */{
+           result.push(a.shift());
+           b.shift();
+         }
+      }
+
+      return result;
     }
 
     function initTmps() {
