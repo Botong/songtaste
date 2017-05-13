@@ -104,6 +104,7 @@ def build_tree(tree, song_list, features, artists, index, depth, max_num, father
     if father is not None:
         tmp = father.copy()
         tmp.pop('children', None)
+        tmp.pop('father', None)
         tree['father'] = tmp
     else:
         tree['father'] = None
