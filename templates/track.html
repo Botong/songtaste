@@ -2,78 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spotify Browser</title>
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'img/favicon.ico')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/mystyles.css')}}">
-{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
-{#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/style.css')}}">
+    <title>SongTaste</title>
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/mystyles.css') }}">
+    {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/haha.css')}}">#}
+    {#    <link rel="stylesheet" href="{{url_for('static', filename='../css/main.css')}}">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/style.css') }}">
     <!-- <script async="" src="js/analytics.js"></script> -->
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='../css/narrow-jumbotron.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../css/narrow-jumbotron.css') }}">
 
-{#    <link rel="stylesheet" href="../css/normalize.css">#}
-{#    <link rel="stylesheet" href="../css/e.css">#}
-{#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
-{#    <script src="../js/d3-tip.js"></script>#}
+    {#    <link rel="stylesheet" href="../css/normalize.css">#}
+    {#    <link rel="stylesheet" href="../css/e.css">#}
+    {#    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>#}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    {#    <script src="../js/d3-tip.js"></script>#}
 
-    <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/audiojs/audio.min.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static', filename='../js/bootstrap-select.min.js')}}"></script>
-<!--
+    <script src="{{ url_for('static', filename='../js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='../js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='../js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='../js/jquery.sidebar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='../js/audiojs/audio.min.js') }}"></script>
+    <!--
     <script src="{{url_for('static', filename='../js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='../js/mediaelement-and-player.min.js')}}"></script>
  -->
-    <script src="{{url_for('static', filename='../js/d3.v3.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='../js/d3.v3.min.js') }}"></script>
 </head>
 <body>
 
 {% include 'partials/header.html' %}
 
+
+    <div class="sidebars">
+    <div class="sidebar right">I am on right!</div>
+        </div>
 <section id="woz-content">
+
     <div id="body">
-    <div id="header">
-        Tools and Libraries for Building Web-based Data Visualisations
-    </div>
-    <div id="footer">
-        <video controls="" autoplay="" name="media"><source src="https://p.scdn.co/mp3-preview/afdd501c6e2af4f4a5c91108825a7793cbd408a4?cid=e812542290fe4c5d832907d8b9f5a0cc" type="audio/mpeg"></video>
-        <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and is
-            for a presentation by <a href="http://animateddata.co.uk/">Peter Cook</a> at <a
-                    href="http://www.meetup.com/Data-Visualisation-Brighton/">Data Visualisation Brighton</a>.</p>
-            <p>It is not comprehensive. If you feel there's a glaring omission please <a
-                    href="http://animateddata.co.uk/contact/">contact me</a>. (For a more comprehensive list try Andy
-                Kirk's <a href="http://www.visualisingdata.com/index.php/resources/">Visualising Data</a>.)</p>
-            <p>This is an adaptation of Mike Bostock's D3 tree layout <a
-                    href="http://mbostock.github.io/d3/talk/20111018/tree.html">example</a>. Thanks Mike :)</p>
-            <p>Click a circle to expand or collapse. Grey indicates not free.</p>
-            <p>I'm available <a href="http://animateddata.co.uk/contact">for hire</a>.</p>
-            <p><a href="http://animateddata.co.uk/training">Find out</a> about my <a
-                    href="http://animateddata.co.uk/training">data visualisation workshops</a></p>.
+        <div id="header">
+            Click on a circle to compare the recommended song with what you like.
+        </div>
+        <div id="footer">
+            <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and
+                is
+                for a presentation by <a href="http://animateddata.co.uk/">Peter Cook</a> at <a
+                        href="http://www.meetup.com/Data-Visualisation-Brighton/">Data Visualisation Brighton</a>.</p>
+                <p>It is not comprehensive. If you feel there's a glaring omission please <a
+                        href="http://animateddata.co.uk/contact/">contact me</a>. (For a more comprehensive list try
+                    Andy
+                    Kirk's <a href="http://www.visualisingdata.com/index.php/resources/">Visualising Data</a>.)</p>
+                <p>This is an adaptation of Mike Bostock's D3 tree layout <a
+                        href="http://mbostock.github.io/d3/talk/20111018/tree.html">example</a>. Thanks Mike :)</p>
+                <p>Click a circle to expand or collapse. Grey indicates not free.</p>
+                <p>I'm available <a href="http://animateddata.co.uk/contact">for hire</a>.</p>
+                <p><a href="http://animateddata.co.uk/training">Find out</a> about my <a
+                        href="http://animateddata.co.uk/training">data visualisation workshops</a></p>.
+            </div>
         </div>
     </div>
-</div>
-    <div class="container">
-        <h4>Artist info</h4>
-        {{ artist }}
-        <h4>Feature info</h4>
-        {{ features }}
-    </div>
-
 
 </section>
-{% include 'partials/foot.html' %}
+{#{% include 'partials/foot.html' %}#}
+
+<footer class="footer">
+    <div class="container">
+{#        <a href="#" class="btn btn-primary" data-action="toggle" data-side="right"><span>Toggle Right</span></a>#}
+        <audio id="audio" controls loop style="width: 100%">
+            <source id="mpeg_source" src="" type="audio/mpeg">
+        </audio>
+    </div>
+</footer>
 
 <script>
+
+    var sidebar = $(".sidebar.right");
+    // Sidebar on right side
+    sidebar.sidebar({side: "right"});
+    // Click handlers
+{#    $(".btn[data-action]").on("click", function () {#}
+{#        var $this = $(this);#}
+{#        var action = $this.attr("data-action");#}
+{#        var side = $this.attr("data-side");#}
+{#        $(".sidebar." + side).trigger("sidebar:" + action);#}
+{#        return false;#}
+{#    });#}
+
+    var audio = document.getElementById("audio");
+    var source = document.getElementById("mpeg_source");
+    audio.volume = 0.5;
 
     var m = [40, 120, 40, 120],
         w = 1280 - m[1] - m[3],
         h = 800 - m[0] - m[2],
         i = 0,
-        root;
+        root, playing;
     var tree = d3.layout.tree()
         .size([h, w]);
     var diagonal = d3.svg.diagonal()
@@ -85,9 +115,30 @@
         .attr("height", h + m[0] + m[2])
         .append("svg:g")
         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+    function startPlay(preview_url) {
+        if (source.src !== preview_url) {
+            source.src = preview_url;
+            audio.load();
+            audio.play();
+            return true;
+        }
+        return false;
+    }
+
+    function toggleSideBar() {
+        sidebar.trigger("sidebar:toggle");
+    }
+    function openSideBar() {
+        sidebar.trigger("sidebar:open");
+    }
+    function closeSideBar() {
+        sidebar.trigger("sidebar:close");
+    }
+
     d3.json("/data/recdata.json", function (json) {
-{#    alert("{{ recommendation }}");#}
-{#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
+        {#    alert("{{ recommendation }}");#}
+        {#    d3.json("/recommendation/2elBjNSdBE2Y3f0j1mjrql/1ivCIgrYZyE0BvItL4Z8lk", function (json) {#}
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
@@ -98,6 +149,11 @@
             }
         }
 
+        if (startPlay(root.preview_url)) {
+            playing = root;
+        }
+
+
         // Initialize the display to show a few nodes.
 //         root.children.forEach(toggleAll);
 //         toggle(root._children[1]);
@@ -105,6 +161,7 @@
 //         toggle(root._children[9]);
 //         toggle(root._children[9]._children[0]);
         toggleAll(root);
+        toggle(root);
         update(root);
     });
     function update(source) {
@@ -127,8 +184,17 @@
                 return "translate(" + source.y0 + "," + source.x0 + ")";
             })
             .on("click", function (d) {
-                toggle(d);
-                update(d);
+                if (startPlay(d.preview_url)) {
+                    playing = d;
+                }
+                if (d !== root) {
+                    toggleSideBar();
+                    toggle(d);
+                    update(d);
+                    openSideBar();
+                } else {
+                    closeSideBar();
+                }
             })
         ;
         nodeEnter.append("svg:circle")
@@ -152,7 +218,16 @@
                 return d.name;
             })
             .style('fill', function (d) {
-                return 'black'//d.free ? 'black' : '#999';
+{#                if (d.preview_url === null) {#}
+{#                    return '#999';#}
+{#                } else {#}
+{#                    if (playing === d) {#}
+{#                        return 'blue';#}
+{#                    } else {#}
+{#                        return 'black';#}
+{#                    }#}
+{#                }#}
+                return d.preview_url !== null ? 'black' : '#999';
             })
             .style("fill-opacity", 1e-6);
         nodeEnter.append("svg:title")
@@ -166,7 +241,7 @@
                 return "translate(" + d.y + "," + d.x + ")";
             });
         nodeUpdate.select("circle")
-            .attr("r", 6)
+            .attr("r", 8)
             .style("fill", function (d) {
                 return d._children ? "lightsteelblue" : "#fff";
             });
