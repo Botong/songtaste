@@ -214,13 +214,13 @@ def recommendation(artist_id, track_id):
     track_info = get_several_tracks(track_ids[:50])['tracks']
     track_info += get_several_tracks(track_ids[50:])['tracks']
 
-    # artists = get_several_artists(artist_ids[:50])['artists']
-    # artists += get_several_artists(artist_ids[50:])['artists']
+    artists = get_several_artists(artist_ids[:50])['artists']
+    artists += get_several_artists(artist_ids[50:])['artists']
 
     features = get_several_track_features(track_ids)['audio_features']
 
     for i in range(len(song_list)):
-        song_list[i]['artist'] = track_info[i]['artists'][0]
+        song_list[i]['artist'] = artists[i]
         song_list[i]['popularity'] = track_info[i]['popularity']
         song_list[i]['image'] = track_info[i]['album']['images']
         if len(song_list[i]['image']) > 0:
