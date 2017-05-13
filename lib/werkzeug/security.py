@@ -216,7 +216,7 @@ def check_password_hash(pwhash, password):
 
     :param pwhash: a hashed string like returned by
                    :func:`generate_password_hash`
-    :param password: the plaintext password to compare against the hash
+    :param password: the plaintext password to compare.json against the hash
     """
     if pwhash.count('$') < 2:
         return False
