@@ -6,7 +6,8 @@
         <h6 style="color: #4a4a4a" id="sidebar_artist">Title</h6>
         <div class="radarChart" style="margin-left: -72px; margin-top: -24px;">
         </div>
-        <div style="margin-left: 100px">
+        <div class="single-tags" id="tags"></div>
+        <div style="margin-left: 20px">
             <div class="row">
                 <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
                 <label id="radarRoot" for="root" style="color: #000;"></label>
@@ -369,9 +370,37 @@
         };
         //Call function to draw the Radar chart
         RadarChart(".radarChart", data, radarChartOptions);
-        document.getElementById('radarRoot').innerHTML = root.name.substring(0, 10);
-        document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 10);
-        document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 10);
+        document.getElementById('radarRoot').innerHTML = root.name.substring(0, 40);
+        document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 40);
+        document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
+        addTags();
+    }
+
+    function addTags() {
+        var mydiv = document.getElementById("tags");
+        while (mydiv.hasChildNodes()) {
+            mydiv.removeChild(node.lastChild);
+        }
+        var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
+        for(var i=0; i<tags.length; i++) {
+            var aTag = document.createElement('a');
+            aTag.innerHTML = tags[i];
+            mydiv.appendChild(aTag);
+        }
+    }
+
+    function intersection_destructive(a, b) {
+      var result = [];
+      while( a.length > 0 && b.length > 0 ) {
+         if      (a[0] < b[0] ){ a.shift(); }
+         else if (a[0] > b[0] ){ b.shift(); }
+         else /* they're equal */{
+           result.push(a.shift());
+           b.shift();
+         }
+      }
+
+      return result;
     }
 
     function initTmps() {

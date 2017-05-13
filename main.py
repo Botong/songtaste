@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Imports
 import os
 import jinja2
@@ -235,7 +236,7 @@ def recommendation(artist_id, track_id):
                 remove_list.append(song_list[j])
 
     for song in remove_list:
-        print("removed: " + song['name'])
+        print("removed one duplicate ")
         song_list.remove(song)
 
     song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: euc_dist(s, song_list[0]))
