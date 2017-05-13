@@ -227,6 +227,17 @@ def recommendation(artist_id, track_id):
             song_list[i]['image'] = song_list[i]['image'][2]
         song_list[i]['features'] = features[i]
 
+    remove_list = []
+
+    for i in range(len(song_list)):
+        for j in range(i+1, len(song_list)):
+            if song_list[i]['name'] == song_list[j]['name'] and song_list[i]['artist']['name'] == song_list[j]['artist']['name']:
+                remove_list.append(song_list[j])
+
+    for song in remove_list:
+        print("removed: " + song['name'])
+        song_list.remove(song)
+
     song_list = song_list[0:1] + sorted(song_list[1:], key=lambda s: euc_dist(s, song_list[0]))
 
     # tree = generate_recommendation_tree(song_list, features, artists)

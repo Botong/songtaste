@@ -2,7 +2,24 @@
 
 <div class="sidebars">
     <div class="sidebar right">
-        <div class="radarChart"></div>
+        <div class="radarChart">
+        </div>
+        <div style="margin-left: 100px">
+            <div class="row">
+                <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
+                <label id="radarRoot" for="root" style="color: #000;"></label>
+            </div>
+            <div class="row">
+                <input type="checkbox" id="current" class="checkbox" onclick="toggleRadarCurrent()">
+                <label id="radarCurrent" for="current" style="color: #000"></label>
+            </div>
+            <div class="row">
+                <input type="checkbox" id="parent" class="checkbox" onclick="toggleRadarParent()">
+                <label id="radarParent" for="parent" style="color: #000"></label>
+            </div>
+        </div>
+
+
         <script src="{{ url_for('static', filename='../js/radarChart.js') }}"></script>
     </div>
 </div>
@@ -88,7 +105,7 @@
         w = 1280 - m[1] - m[3],
         h = 800 - m[0] - m[2],
         i = 0,
-        root, playing;
+        root, playing, rootTmp = {}, playingTmp = {}, parentTmp = {};
     var tree = d3.layout.tree()
         .size([h, w]);
     var diagonal = d3.svg.diagonal()
@@ -165,6 +182,7 @@
         toggleAll(root);
         toggle(root);
         update(root);
+        initTmps();
     });
     function update(source) {
         var duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -322,7 +340,7 @@
 
         // EDC951 seed, CC333F current, 00A0B0 parent
         var color = d3.scale.ordinal()
-            .range(["#EDC951", "#CC333F", "#00A0B0"]);
+            .range(["#00A0B0", "#CC333F", "#EDC951"]);
 
         var radarChartOptions = {
             w: width,
@@ -335,10 +353,53 @@
         };
         //Call function to draw the Radar chart
         RadarChart(".radarChart", data, radarChartOptions);
+        document.getElementById('radarRoot').innerHTML = root.name.substring(0, 10);
+        document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 10);
+        document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 10);
     }
 
-    function max(a, b) {
-        return (a > b) ? a : b;
+    function initTmps() {
+        rootTmp.danceability = 0;
+        rootTmp.energy = 0;
+        rootTmp.liveness = 0;
+        rootTmp.loudness = -60;
+        rootTmp.tempo = 0;
+        rootTmp.valence = 0;
+
+        playingTmp.danceability = 0;
+        playingTmp.energy = 0;
+        playingTmp.liveness = 0;
+        playingTmp.loudness = -60;
+        playingTmp.tempo = 0;
+        playingTmp.valence = 0;
+
+        parent.danceability = 0;
+        parent.energy = 0;
+        parent.liveness = 0;
+        parent.loudness = -60;
+        parent.tempo = 0;
+        parent.valence = 0;
+    }
+
+    function toggleRadarRoot(){
+        var tmp = clone(root.features);
+        root.features = rootTmp;
+        rootTmp = tmp;
+        renderRadar();
+    }
+
+    function toggleRadarCurrent(){
+        var tmp = clone(playing.features);
+        playing.features = playingTmp;
+        playingTmp = tmp;
+        renderRadar();
+    }
+
+    function toggleRadarParent(){
+        var tmp = clone(playing.father.features);
+        playing.father.features = parentTmp;
+        parentTmp = tmp;
+        renderRadar();
     }
 
     function setupRadar(d0, d1, d2) {
@@ -381,5 +442,14 @@
                 {axis: "valence", value: input[i].valence}])
         }
         return output;
+    }
+
+    function clone(obj) {
+        if (null == obj || "object" != typeof obj) return obj;
+        var copy = obj.constructor();
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+        }
+        return copy;
     }
 </script>
