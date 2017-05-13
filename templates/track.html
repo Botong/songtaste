@@ -6,8 +6,7 @@
         <h6 style="color: #4a4a4a" id="sidebar_artist">Title</h6>
         <div class="radarChart" style="margin-left: -72px; margin-top: -24px;">
         </div>
-        <div class="single-tags" id="tags"></div>
-        <div style="margin-left: 20px">
+        <div style="margin-left: 20px; margin-top: -50px">
             <div class="row">
                 <input type="checkbox" id="root" class="checkbox" onclick="toggleRadarRoot()">
                 <label id="radarRoot" for="root" style="color: #000;"></label>
@@ -21,8 +20,7 @@
                 <label id="radarParent" for="parent" style="color: #000"></label>
             </div>
         </div>
-
-
+        <div class="single-tags" id="tags"></div>
         <script src="{{ url_for('static', filename='../js/radarChart.js') }}"></script>
     </div>
 </div>
@@ -379,7 +377,7 @@
     function addTags() {
         var mydiv = document.getElementById("tags");
         while (mydiv.hasChildNodes()) {
-            mydiv.removeChild(node.lastChild);
+            mydiv.removeChild(mydiv.lastChild);
         }
         var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
         for(var i=0; i<tags.length; i++) {
