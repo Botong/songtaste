@@ -136,6 +136,7 @@ def recommendation(artist_id, track_id):
     # artist_info = get_artist(artist_id)
     # features = get_track_audio_features(track_id)
     song_list = get_recommendation(track_id, artist_id)['tracks']
+
     song_list.insert(0, get_a_track(track_id))
 
     track_ids = []
