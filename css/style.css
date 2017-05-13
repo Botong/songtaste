@@ -147,7 +147,7 @@ path.link {
     bottom: 0;
     width: 360px;
     z-index: 2;
-    overflow: scroll;
+    overflow: hidden;
     background: #f9f9f9;
 }
 

@@ -2,7 +2,7 @@
 
 <div class="sidebars">
     <div class="sidebar right">
-        <div class="radarChart">
+        <div class="radarChart" style="margin-left: -72px">
         </div>
         <div class="single-tags" id="tags"></div>
         <div style="margin-left: 100px">
@@ -54,18 +54,38 @@
 {#{% include 'partials/foot.html' %}#}
 
 <footer class="footer noselect">
+    {#    {% if t.album.images[0].height > t.album.images[0].width %}#}
+    {#        {% set direction = "portrait" %}#}
+    {#    {% else %}#}
+    {#        {% set direction = "landscape" %}#}
+    {#    {% endif %}#}
+    {#    <div class="row">#}
+    <div style="margin-left: 32px; margin-top: -16px; width: 64px; height: 64px; object-position: center; display: inline-block; overflow: hidden; float: left;">
+        <img id="thumbnail" class=""
+             src="http://pic3.178.com/1030/10308342/month_1704/0c4120df33d4a6fc5e79b1ab54ec5649.png">
+    </div>
+    <div style="float: left; margin-left: 6px; margin-top: -9px">
+        <h5 id="track_name"></h5>
+        <h6 id="artist_name" style="margin-top: 2px"></h6>
+    </div>
     <div class="container">
         {#        <a href="#" class="btn btn-primary" data-action="toggle" data-side="right"><span>Toggle Right</span></a>#}
         <audio id="audio" controls style="width: 100%">
             <source id="mpeg_source" src="" type="audio/mpeg">
         </audio>
     </div>
+    {#        </div>#}
 </footer>
 
 <script>
 
     var body = $('body');
     body.loading();
+
+    var track_name = document.getElementById("track_name");
+    var artist_name = document.getElementById("artist_name");
+
+    var thumbnail = document.getElementById("thumbnail");
 
     var sidebar = $(".sidebar.right");
     // Sidebar on right side
@@ -120,6 +140,26 @@
         sidebar.trigger("sidebar:close");
     }
 
+    function setThumbnail(song) {
+        var image = song.image;
+
+        thumbnail.src = image.url;
+        if (image.height > image.width) {
+            thumbnail.className = "portrait";
+        } else {
+            thumbnail.className = "landscape";
+        }
+
+
+        var songname = song.name;
+        if (song.name.length > 28) {
+            songname = song.name.substr(0, 24).trim() + "...";
+        }
+
+        track_name.innerText = songname;
+        artist_name.innerText = song.artist.name;
+    }
+
     {#    d3.json("/data/recdata.json", function (json) {#}
     {#    alert("{{ recommendation }}");#}
 
@@ -137,6 +177,7 @@
 
         if (startPlay(root.preview_url)) {
             playing = root;
+            setThumbnail(root);
         }
 
 
@@ -166,30 +207,31 @@
             });
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("svg:g")
-                .attr("class", "node")
-                .attr("transform", function (d) {
-                    return "translate(" + source.y0 + "," + source.x0 + ")";
-                })
-                .on("click", function (d) {
-                    if (startPlay(d.preview_url)) {
-                        playing = d;
-                        renderRadar();
-                    }
-                    if (d !== root) {
-                        openSideBar();
-                    } else {
-                        closeSideBar();
-                    }
-                })
-                .on("dblclick", function (d) {
-                    if (d !== root) {
-                        body.loading();
-                        toggle(d);
-                        update(d);
-                        body.loading('stop');
-                    }
-                })
-            ;
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + source.y0 + "," + source.x0 + ")";
+            })
+            .on("click", function (d) {
+                if (startPlay(d.preview_url)) {
+                    playing = d;
+                    setThumbnail(d);
+                    renderRadar();
+                }
+                if (d !== root) {
+                    openSideBar();
+                } else {
+                    closeSideBar();
+                }
+            })
+            .on("dblclick", function (d) {
+                if (d !== root) {
+                    body.loading();
+                    toggle(d);
+                    update(d);
+                    body.loading('stop');
+                }
+            })
+        ;
         nodeEnter.append("svg:circle")
             .attr("r", 1e-6)
             .style("fill", function (d) {
@@ -209,6 +251,9 @@
                 return d.children || d._children ? "end" : "start";
             })
             .text(function (d) {
+                if (d.name.length > 28) {
+                    return d.name.substr(0, 25).trim() + "...";
+                }
                 return d.name;
             })
             .style('fill', function (d) {
@@ -356,21 +401,21 @@
         parent.valence = 0;
     }
 
-    function toggleRadarRoot(){
+    function toggleRadarRoot() {
         var tmp = clone(root.features);
         root.features = rootTmp;
         rootTmp = tmp;
         renderRadar();
     }
 
-    function toggleRadarCurrent(){
+    function toggleRadarCurrent() {
         var tmp = clone(playing.features);
         playing.features = playingTmp;
         playingTmp = tmp;
         renderRadar();
     }
 
-    function toggleRadarParent(){
+    function toggleRadarParent() {
         var tmp = clone(playing.father.features);
         playing.father.features = parentTmp;
         parentTmp = tmp;
@@ -380,16 +425,40 @@
     function setupRadar(d0, d1, d2) {
         var input = [d0, d1, d2];
         var output = [];
+        var top = {};
+        {#        top['acousticness'] = max(input[0].acousticness, input[1].acousticness);#}
+        {#        top['danceability'] = max(input[0].danceability, input[1].danceability);#}
+        {#        top['energy'] = max(input[0].energy, input[1].energy);#}
+        {#        top['instrumentalness'] = max(input[0].instrumentalness, input[1].instrumentalness);#}
+        {#        top['liveness'] = max(input[0].liveness, input[1].liveness);#}
+        {#        top['loudness'] = max(input[0].loudness, input[1].loudness) + 60;#}
+        {#        top['tempo'] = max(input[0].tempo, input[1].tempo);#}
+        {#        top['valence'] = max(input[0].valence, input[1].valence);#}
+        {##}
+        {#        for (var i = 0; i < 2; i++) {#}
+        {#            output.push([#}
+        {#                {axis: "acousticness", value: input[i].acousticness / top['acousticness']},#}
+        {#                {axis: "danceability", value: input[i].danceability / top['danceability']},#}
+        {#                {axis: "energy", value: input[i].energy / top['energy']},#}
+        {#                {axis: "instrumentalness", value: input[i].instrumentalness / top['instrumentalness']},#}
+        {#                {axis: "liveness", value: input[i].liveness / top['liveness']},#}
+        {#                {axis: "loudness", value: (input[i].loudness + 60) / top['loudness']},#}
+        {#                {axis:"speechiness",value:input[i].speechiness},#}
+        {#                {axis: "tempo", value: input[i].tempo / top['tempo']},#}
+        {#                {axis: "valence", value: input[i].valence / top['valence']}])#}
+        {#        }#}
+
+
         for (var i = 0; i < 3; i++) {
             output.push([
-{#                {axis: "acousticness", value: input[i].acousticness},#}
+                {#                {axis: "acousticness", value: input[i].acousticness},#}
                 {axis: "danceability", value: input[i].danceability},
-                {axis: "energy", value: input[i].energy },
-{#                {axis: "instrumentalness", value: input[i].instrumentalness},#}
+                {axis: "energy", value: input[i].energy},
+                {#                {axis: "instrumentalness", value: input[i].instrumentalness},#}
                 {axis: "liveness", value: input[i].liveness},
-                {axis: "loudness", value: (input[i].loudness + 60)/60},
+                {axis: "loudness", value: (input[i].loudness + 60) / 60},
                 {#                {axis:"speechiness",value:input[i].speechiness},#}
-                {axis: "tempo", value: input[i].tempo/200},
+                {axis: "tempo", value: input[i].tempo / 200},
                 {axis: "valence", value: input[i].valence}])
         }
         return output;

@@ -7,6 +7,7 @@ import time
 
 GET_ARTIST_ENDPOINT = 'https://api.spotify.com/v1/artists/{id}'
 GET_ARTISTS_ENDPOINT = 'https://api.spotify.com/v1/artists?ids={ids}'
+GET_SEVERAL_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/tracks/?ids={ids}'
 SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search'
 RELATED_ARTISTS_ENDPOINT = 'https://api.spotify.com/v1/artists/{id}/related-artists'
 TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/artists/{id}/top-tracks'
@@ -92,6 +93,14 @@ def get_related_artists(artist_id):
 # https://developer.spotify.com/web-api/get-track/
 def get_a_track(track_id):
     url = GET_A_TRACK_ENDPOINT.format(id=track_id)
+    resp = requests.get(url)
+    return resp.json()
+
+
+# https://developer.spotify.com/web-api/get-several-tracks/
+def get_several_tracks(track_ids):
+    ids = ','.join(track_ids)
+    url = GET_SEVERAL_TRACKS_ENDPOINT.format(ids=ids)
     resp = requests.get(url)
     return resp.json()
 
