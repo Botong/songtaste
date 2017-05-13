@@ -9,38 +9,48 @@
           <a href="{{artist.external_urls.spotify}}">
                   {{artist.name}} on Spotify
                 </a>
-        <div class="row">
-          <div class="col-sm-8">
+{#          <div class="col-md-12">#}
               {% if tracks %}
                   <section class="sec tracks">
                     <h3>Top Tracks</h3>
-                    <table class="table table-condensed tracks">
-                      <thead>
-                        <tr>
-                          <th>Track</th>
-                          <th>Popularity</th>
-                        </tr>
-                      </thead>
+{#                    <table class="table table-condensed tracks">#}
+{#                      <thead>#}
+{#                        <tr>#}
+{#                          <th>Track</th>#}
+{#                          <th>Popularity</th>#}
+{#                        </tr>#}
+{#                      </thead>#}
+        <div class="row">
                         {% for t in tracks %}
-                            <tr class="track">
-                              <td>
-                                  <div class="track-info">
-                                    <span class="track-name"><a href="/artist/{{ artist.id }}/track/{{t.id}}">{{ t.name }}</a></span>
+                            <div class="col-md-6 col-sm-12">
+{#                            <tr class="track">#}
+{#                              <td>#}
+                                  <div class="track-info thumbnail" style="border: 1px solid #ddd; padding: 4px; margin-bottom: 20px">
+                                      <a href="/artist/{{ artist.id }}/track/{{t.id}}">
+                                      <img src="{{ t.album.images[0].url }}" style="width: 100%;  display: block;">
+                                          </a>
+                                      <div class="caption" style="padding: 9px">
+                                          <span class="track-name"><a href="/artist/{{ artist.id }}/track/{{t.id}}">{{ t.name }}</a></span>
                                     <span class="album-name">
                                           {{ t.album.name }}
                                     </span>
+                                  <audio controls loop preload="auto" style="width: 100%; margin-top: 5px">
+                                      <source src="{{ t.preview_url }}" type="audio/mpeg">
+                                  </audio>
                                   </div>
-                                  <audio src="{{ t.preview_url }}" preload="auto" />
-                              </td>
-                              <td class="number">{{ t.popularity }}</td>
-                            </tr>
+                                      </div>
+{#                                  <audio src="{{ t.preview_url }}" preload="auto" style="width: 100%"></audio>#}
+{#                              </td>#}
+{#                              <td class="number">{{ t.popularity }}</td>#}
+{#                            </tr>#}
+                            </div>
                         {% endfor %}
-                    </table>
+{#                    </table>#}
 
+        </div>
                   </section>
               {% endif %}
-            </div>
-        </div>
+{#            </div>#}
 
 
     </section>
