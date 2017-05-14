@@ -153,13 +153,17 @@
         }
 
 
-{#        var songname = song.name;#}
-{#        if (song.name.length > 28) {#}
-{#            songname = song.name.substr(0, 24).trim() + "...";#}
-{#        }#}
+        {#        var songname = song.name;#}
+        {#        if (song.name.length > 28) {#}
+        {#            songname = song.name.substr(0, 24).trim() + "...";#}
+        {#        }#}
 
         track_name.innerText = song.name;
         artist_name.innerText = song.artist.name;
+    }
+
+    function isASCII(str) {
+        return /^[\x00-\x7F]*$/.test(str);
     }
 
     {#    d3.json("/data/recdata.json", function (json) {#}
@@ -256,9 +260,15 @@
                 return d.children || d._children ? "end" : "start";
             })
             .text(function (d) {
-{#                if (d.name.length > 28) {#}
-{#                    return d.name.substr(0, 25).trim() + "...";#}
-{#                }#}
+                if (isASCII(d.name)) {
+                    if (d.name.length > 28) {
+                        return d.name.substr(0, 25).trim() + "...";
+                    }
+                } else {
+                    if (d.name.length > 12) {
+                        return d.name.substr(0, 10).trim() + "...";
+                    }
+                }
                 return d.name;
             })
             .classed("limit-text", true)
@@ -382,7 +392,7 @@
             mydiv.removeChild(mydiv.lastChild);
         }
         var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
-        for(var i=0; i<tags.length; i++) {
+        for (var i = 0; i < tags.length; i++) {
             var aTag = document.createElement('a');
             aTag.innerHTML = tags[i];
             mydiv.appendChild(aTag);
@@ -390,17 +400,21 @@
     }
 
     function intersection_destructive(a, b) {
-      var result = [];
-      while( a.length > 0 && b.length > 0 ) {
-         if      (a[0] < b[0] ){ a.shift(); }
-         else if (a[0] > b[0] ){ b.shift(); }
-         else /* they're equal */{
-           result.push(a.shift());
-           b.shift();
-         }
-      }
+        var result = [];
+        while (a.length > 0 && b.length > 0) {
+            if (a[0] < b[0]) {
+                a.shift();
+            }
+            else if (a[0] > b[0]) {
+                b.shift();
+            }
+            else /* they're equal */{
+                result.push(a.shift());
+                b.shift();
+            }
+        }
 
-      return result;
+        return result;
     }
 
     function initTmps() {
