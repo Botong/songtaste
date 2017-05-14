@@ -115,12 +115,12 @@ line {
 }
 
 a:link, a:visited {
-    color: steelblue;
+    color: #666;
     text-decoration: none;
 }
 
 a:hover {
-    color: #666;
+    color: #699;
 }
 
 .hint {
