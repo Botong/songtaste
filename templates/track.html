@@ -343,8 +343,29 @@
         var margin = {top: 100, right: 100, bottom: 100, left: 100},
             width = 250;
         height = 250;
+        var input = [];
+        input.push(root.features);
+        input.push(playing.features);
+        if (root.name != playing.father.name) {
+            input.push(playing.father.features);
+{#            document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);#}
+            $( "#radarParent" ).show();
+        } else {
+            $( "#radarParent" ).hide();
+        }
 
-        var data = setupRadar(root.features, playing.features, playing.father.features);
+        var data = [];
+
+        for (var i = 0; i < input.length; i++) {
+            data.push([
+                {axis: "acousticness", value: input[i].acousticness},
+                {axis: "danceability", value: input[i].danceability},
+                {axis: "energy", value: input[i].energy},
+                {axis: "liveness", value: input[i].liveness},
+                {axis: "loudness", value: (input[i].loudness + 60) / 60},
+                {axis: "tempo", value: input[i].tempo / 200},
+                {axis: "valence", value: input[i].valence}])
+        }
 
         // EDC951 seed, CC333F current, 00A0B0 parent
         var color = d3.scale.ordinal()
@@ -448,23 +469,6 @@
         playing.father.features = parentTmp;
         parentTmp = tmp;
         renderRadar();
-    }
-
-    function setupRadar(d0, d1, d2) {
-        var input = [d0, d1, d2];
-        var output = [];
-
-        for (var i = 0; i < 3; i++) {
-            output.push([
-                {axis: "acousticness", value: input[i].acousticness},
-                {axis: "danceability", value: input[i].danceability},
-                {axis: "energy", value: input[i].energy},
-                {axis: "liveness", value: input[i].liveness},
-                {axis: "loudness", value: (input[i].loudness + 60) / 60},
-                {axis: "tempo", value: input[i].tempo / 200},
-                {axis: "valence", value: input[i].valence}])
-        }
-        return output;
     }
 
     function clone(obj) {
