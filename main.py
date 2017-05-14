@@ -194,7 +194,8 @@ def euc_dist(s1, s2):
             + (a['valence'] - b['valence']) ** 2 \
             + (a['danceability'] - b['danceability']) ** 2 \
             + (a['energy'] - b['energy']) ** 2 \
-            + (a['liveness'] - b['liveness']) ** 2
+            + (a['liveness'] - b['liveness']) ** 2 \
+            + (a['acousticness'] - b['acousticness']) ** 2
     return math.sqrt(dist)
 
 
