@@ -366,7 +366,7 @@
         document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
         addTags();
         document.getElementById('recommended_song').innerHTML = "Recommended based on '" +
-            playing.father.name +"' danceability, valence, tempo, loudness, liveness, energy, and "+
+            playing.father.name +"'acousticness danceability, valence, tempo, loudness, liveness, energy, and "+
             playing.father.artist.name+"'s genres"
     }
 
@@ -457,7 +457,7 @@
 
         for (var i = 0; i < 3; i++) {
             output.push([
-                {#                {axis: "acousticness", value: input[i].acousticness},#}
+                {axis: "acousticness", value: input[i].acousticness},
                 {axis: "danceability", value: input[i].danceability},
                 {axis: "energy", value: input[i].energy},
                 {#                {axis: "instrumentalness", value: input[i].instrumentalness},#}
