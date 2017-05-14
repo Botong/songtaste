@@ -3,22 +3,31 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+              <a id="home" class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Analysis <span class="sr-only"></span></a>
+              <a id="data" class="nav-link" href="/data">Data<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Data Quality <span class="sr-only"></span></a>
+              <a id="approach" class="nav-link" href="/approach">Approach<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">User Test <span class="sr-only"></span></a>
+              <a id="usertest" class="nav-link" href="/usertest">User Test<span class="sr-only"></span></a>
             </li>
-{#            <li class="nav-item">#}
-{#              <a class="nav-link" href="https://github.com/Botong/Data_Pipeline_Byte3_Mobile">Git</a>#}
-{#            </li>#}
+            <li class="nav-item">
+              <a id="about" class="nav-link" href="/about">About<span class="sr-only"></span></a>
+            </li>
           </ul>
         </nav>
         <h3 class="text-muted"><a href="/">SongTaste</a></h3>
     </div>
 </div>
+
+<script>
+    var path = window.location.pathname.substring(1);
+    if (path.length === 0) {
+        path = "home"
+    }
+    var tab = document.getElementById(path);
+    tab.className += " active";
+</script>

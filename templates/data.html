@@ -1,0 +1,219 @@
+{% include 'partials/head.html' %}
+
+<div class="container">
+    <div class="main inactive">
+        <h2>About the data</h2>
+        <p>The data used in this project is collected from two sources: The Million Song Dataset, and the complementary
+            dataset collected with Spotify Open API.</p>
+        <ul>
+            <li>
+                <h5>The Million Song Dataset</h5>
+                <p>This is a publicly available collection of metadata and audio features for
+                    a million contemporary popular songs. This dataset is one of the most well-known music datasets
+                    which is widely used for music recommendation contest competitions. During the data selection, we
+                    have encountered some other music datasets, for example, the Nottingham Music Database with ABC
+                    notations of over 1000 folk tunes. We finally decide to use the Million Song Dataset because:</p>
+                <ol>
+                    <li>
+                        <p>The dataset mainly contains contemporary popular songs which attract the users more. This
+                            will
+                            trigger their interests to get recommendations about their beloved songs and explore popular
+                            song’s similarity.</p>
+                    </li>
+                    <li>
+                        <p>The dataset is large enough with million songs for algorithm training. And with sufficient
+                            data,
+                            it’s also good for providing top 10 reasonable similar songs.</p>
+                    </li>
+                    <li>
+                        <p>There are many features related to music for each song, including danceability, energy,
+                            loudness, mode, speechiness, acousticness, liveness, valence, etc. When the number of
+                            features
+                            is larger, we have more chance to enhance the prediction power of the algorithm. And with
+                            the
+                            adequate features, we’ll be more likely to measure the similarity and recommend similar
+                            songs
+                            given the user’s preference.</p>
+                    </li>
+                </ol>
+                <p>
+                    After feature engineering, we finally decide to choose the following features of this dataset:
+                    loudness, tempo,
+                    liveness, acousticness, danceability, speechiness, valence, energy and genres. We’ll discuss these
+                    features in
+                    more details in Our Approach part.
+                </p>
+            </li>
+            <li>
+                <h5>Spotify Open API</h5>
+                <p>
+                    Spotify provides with a comprehensive Web API to access its track data, artist
+                    data, etc. We
+                    have collected a complementary dataset with this API. This dataset is complementary in two senses:
+                </p>
+                <ol>
+                    <li><p>It contains data for songs in more recent years which are not included in the Million Song
+                        Dataset.</p></li>
+                    <li><p>It has more data like images for artists, albums, and preview link for songs, which are
+                        missing from the Million Song Dataset, but are required to help with our visualization.</p></li>
+                </ol>
+                <p>
+                    The dataset collected with Spotify API used the same procedures as that of the Million Song Dataset.
+                    And we have
+                    collected 500,000 song in total since 2012.
+                </p>
+            </li>
+        </ul>
+
+        <h2>Data quality</h2>
+        <ul>
+            <li>
+                <h5>Completeness</h5>
+                <p>The Million Song Dataset is a very comprehensive dataset with exactly 1,000,000 songs in total. And
+                    it has all
+                    the features we need for running the music recommendation algorithm. So, it does have the
+                    appropriate data to
+                    help us answer our question.</p>
+                <p>However, it only contains music data until the end of 2011. In order to make our data really complete
+                    and
+                    support recommendation for recent songs, we utilized Spotify API. Spotify API is an offspring of the
+                    Echo Nest
+                    API, which is source of the Million Song Dataset. So, it provides us with the same set of features.
+                    And in
+                    addition, it has fields like artist images, album images and preview audio, which can help with our
+                    narrative
+                    greatly.</p>
+                <p>Meanwhile, what Spotify provides is only APIs, so we deployed a crawler on AWS with the similar steps
+                    used to
+                    collect the Million Song Dataset (We’ll give a detailed description on the steps in the
+                    accountability section).
+                    By combining the existing Million Song Dataset, and the Spotify Dataset we collected, we now have a
+                    very
+                    complete dataset (1,000,000 songs before 2012, and 500,000 songs after 2012, until May 2017), that
+                    is able to
+                    satisfy all our needs in answering the question.</p>
+            </li>
+            <li>
+                <h5>Coherence</h5>
+                <p>We have examined the coherence of the dataset in two directions:</p>
+                <ol>
+                    <li>
+                        <h6>Does the data “add up”? </h6>
+                        <p>
+                            We wrote a MapReduce program check the validity of each field by answering the following
+                            questions: does the
+                            type of each field in each record match with the type that field actually is? Is the range
+                            for values correct?
+                            (e.g. -60 to 0 for loudness, 0 to 1 for danceability).<br>
+                            The results turned out to be perfect: all fields are coherent. We believe this is because
+                            these features are
+                            calculated for each song when it was first added into the database of Spotify (or Echo
+                            Nest). And that process
+                            can ensure the coherent of the fields.
+                        </p>
+                    </li>
+                    <li>
+                        <h6>Does the data make sense to itself?</h6>
+                        <p>
+                            Because the features are calculated by Spotify, we need to make sure these features really
+                            match the song in a
+                            reasonable way, before we actually start using them. We randomly picked 100 songs from the
+                            dataset, and looked
+                            the features, then listened to it. And all of them have exhibited great coherence. For
+                            example, the songs with
+                            high scores for danceability will a rhythm that is very suitable to dance with. Also, the
+                            songs with high energy
+                            scores usually have high scores in danceability too.
+                            Based on this, we believe the data is coherent.
+
+                        </p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h5>Correctness</h5>
+                <p>
+                    The Million Song Dataset is a very widely used and trusted dataset, we can safely rule out the
+                    possibility of
+                    implementation issues for calculating the features and also there should not be any fraudulent data
+                    or
+                    measurement errors (since there is actually no space for such problems considering the type of the
+                    data).
+                </p>
+                <p>
+                    However, there is a potential source of bias: The Million Song Dataset is collected using a US-based
+                    service,
+                    which might favor song American users like in selecting “popular” songs, considering the way it was
+                    collected
+                    (please refer to accountability section for details). Nonetheless, this problem is not actually a
+                    concern,
+                    because our project is precisely trying to provide music recommendation for users in the US, and who
+                    are
+                    accessible to computer and internet (so that they can use our service), and they are also who care
+                    about the
+                    music they listen to, meaning that the population our project concerns and the population of the
+                    Spotify service
+                    can be taken as the same population. So, there should be no concern of bias in this case.</p>
+                <p>In a nutshell, we can safely say that the datasets used in this project is correct.</p>
+            </li>
+            <li>
+                <h5>aCcountability</h5>
+
+                <p class="small">Much about the dataset has been mentioned in the “About the data” section.</p>
+                <h6>The Million Song Dataset</h6>
+                <p>
+                    The Million Song Dataset was created under a grant from the National Science Foundation, project
+                    IIS-0713334.
+                    The original data was contributed by The Echo Nest, an industry's leading music intelligence
+                    company. This
+                    dataset has been widely used for music recommendation contest competitions and academic research.
+                    The dataset
+                    has also been introduced in a paper format published in 12th International Society for Music
+                    Information
+                    Retrieval Conference (ISMIR 2011). Based on all information above, we believe this dataset is very
+                    accountable.
+                </p>
+                <p>And the data in the Million Song Dataset was collected in the following steps:</p>
+                <ol>
+                    <li>
+                        <p>Getting the most 'familiar' artists according to The Echo Nest, then downloading as many
+                            songs as possible from each of them</p>
+                    </li>
+                    <li>
+                        <p>Getting the 200 top terms from The Echo Nest, then using each term as a descriptor to find
+                            100 artists, then
+                            downloading as many of their songs as possible</p>
+                    </li>
+                    <li>
+                        <p>Getting the songs and artists from the CAL500 dataset</p>
+                    </li>
+                    <li>
+                        <p>Getting 'extreme' songs from The Echo Nest search params, e.g. songs with highest energy,
+                            lowest energy,
+                            tempo, song hotttnesss, ...</p>
+                    </li>
+                    <li>
+                        <p>A random walk along the similar artists links starting from the 100 most familiar artists</p>
+                    </li>
+                </ol>
+                <p>The number of songs was approximately 8950 after step 1), step 3) added around 15000 songs, and we
+                    add approx.
+                    500000 songs before starting step 5.</p>
+                <h6>Spotify Dataset</h6>
+                <p>The Spotify API is an offspring of the Echo Nest API the Million Song Dataset used to collect. And the Spotify
+        dataset are collected in the same way as the Million Song Dataset, but only looking for songs after 2012.</p>
+                <h6>Other accountability issues:</h6>
+                <ul>
+                    <li>
+                        <p>Privacy: there is no personal information in these datasets, so there is no concern about privacy.</p>
+                    </li>
+                    <li>
+                        <p>Accessibility: the first data set is publicly accessibly, the second the accessible using Spotify Open API.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% include 'partials/foot.html' %}

@@ -80,16 +80,28 @@ def track(artist_id, track_id):
     return html
 
 
-@app.route('/quality')
-def quality():
-    template = JINJA_ENVIRONMENT.get_template('templates/DataQuality.html')
-    return template.render()
+@app.route('/about')
+def about():
+    html = render_template('about.html')
+    return html
+
+
+@app.route('/data')
+def data():
+    html = render_template('data.html')
+    return html
+
+
+@app.route('/approach')
+def approach():
+    html = render_template('approach.html')
+    return html
 
 
 @app.route('/usertest')
 def usertest():
-    template = JINJA_ENVIRONMENT.get_template('templates/UserTest.html')
-    return template.render()
+    html = render_template('usertest.html')
+    return html
 
 
 @app.route('/poster')

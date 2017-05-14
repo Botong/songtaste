@@ -1,0 +1,122 @@
+{% include 'partials/head.html' %}
+
+<div class="container">
+    <div class="main inactive">
+        <h2>Our Recommendation Algorithm and Approach</h2>
+        <p>To start recommending songs, we need a seed song from the user. The song must exist in our database and the
+            user has the freedom to search for a song based on its name, keywords. Or the user can also reach the track
+            by giving an artist name.
+        <p>
+            Based on the number of how many times a song for each artist has been listened to, we have added them up to
+            estimate the popularity of each song. This is useful when the user only knows his/her favorite artist. The
+            website will return the top 10 popular tracks and the user can select one to be the seed song.
+        </p>
+        <p>
+            To find the songs to recommend to the user, we have performed the K-nearest neighbor algorithm on the entire
+            dataset. The intuition behind this approach is to find songs that are distance-wise close to the seed song
+            and those songs are essentially neighbors of the seed song.
+        </p>
+        <p>
+            To calculate such distance. We need to define a distance function. The distance function should take the
+            genre of the song or artist and the audio features of the song itself into account.
+        </p>
+
+        <h3>Part I – Audio Features</h3>
+        <p>The audio features that are provided in the dataset for each track are “accousticness”, “dancebility”,
+            “valence”, “tempo”, “loudness”, “liveness”, “energy”, “speachness” and “instrument”. Here are definitions
+            for each feature. The definitions are extracted from both “Million Song Dataset” official website and
+            Spotify.</p>
+        <ol>
+            <li>
+                <p>Acousticness is defined as how many prominent acoustic sounds a given track has (for example acoustic
+                    guitar and tambourine or pure vocal) versus how many electronic sounds it has (synthesizer, drum
+                    machine). The scale of acousticness is from 0 to 1, measuring the percentage of acousticness in the
+                    track.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Danceability describes how suitable a track is for dancing based on a combination of musical
+                    elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is
+                    least danceable and 1.0 is most danceable.
+                </p>
+            </li>
+            <li>
+                <p>
+                    A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high
+                    valence sound
+                    more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative
+                    (e.g. sad,
+                    depressed, angry).
+                </p>
+            </li>
+            <li>
+                <p>
+                    The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is
+                    the speed or
+                    pace of a given piece and derives directly from the average beat duration. Most of songs have tempo
+                    under 200 so I
+                    set 200 to be the max that tempo can go and normalize it to be a number from 0 to 1.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire
+                    track and are
+                    useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the
+                    primary
+                    psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db.
+                    I have
+                    normalized this value to be 0 to 1 by adding 60 and divide by 60.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Detects the presence of an audience in the recording. Higher liveness values represent an increased
+                    probability
+                    that the track was performed live. A value above 0.8 provides strong likelihood that the track is
+                    live.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Out of the 8 features that are provided for each song in the dataset. We have also observed that
+                    instrument and
+                    instrument and speechness which measures how much is this song played by instrument and contains
+                    speech on a scale
+                    of 0 to 1 99% has values that are very close to 0 or 1. For instance, a typical vocal song will have
+                    instrument
+                    ratio 0 to 0.01 and a classic music piece that contains no vocal will have instrument ratio of 1.
+                    Similar to
+                    speechness, most songs that are not rap music have speechness of 0 and rap will have number close to
+                    1. We know that
+                    the genre of the music have already captured this kind of features. For example, a track played by
+                    Yo-yo Ma will
+                    have genres like classical music, violin and etc and a song like “Mockingbird” by Eminem will have
+                    genre rap.
+                    Therefore, we drop these two features when performing K-Nearest Neighbor.
+                </p>
+            </li>
+        </ol>
+        <h3>Part II – Categorical Features</h3>
+        <p>
+            The second part of the features is song genre. Thanks to the “Million Song Dataset” and Spotify API, we are
+            able to get all genre tags that an artist is related to. In our distance function, we give the genres a
+            heavy heuristic weight compared to audio features because we believe that it is very likely that a user who
+            likes a song that is Taiwanese pop music will like another Taiwanese pop song. This means when we find the
+            nearest neighbors of the given track, we prefer to find songs from artists who have produced songs that have
+            similar genres to the given one’s artist.
+        </p>
+        <p>
+            In combination, we take the Euclidean distance between songs using the features illustrated above and our
+            API return the nearest 20 songs.
+        </p>
+        <p>
+            To reduce page load time and readability, we randomly pick 3 songs from these 20 songs to display on the
+            webpage. The randomness also increases the usability because we believe users do not want to see the same
+            recommendation every time it visits our site and our users feedbacks confirms this.
+        </p>
+    </div>
+</div>
+
+{% include 'partials/foot.html' %}
