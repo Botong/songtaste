@@ -213,10 +213,13 @@ def recommendation(artist_id, track_id):
         artist_ids.append(t['artists'][0]['id'])
 
     track_info = get_several_tracks(track_ids[:50])['tracks']
-    track_info += get_several_tracks(track_ids[50:])['tracks']
+    if len(track_ids) > 50:
+        track_info += get_several_tracks(track_ids[50:])['tracks']
 
     artists = get_several_artists(artist_ids[:50])['artists']
-    artists += get_several_artists(artist_ids[50:])['artists']
+
+    if len(artist_ids) > 50:
+        artists += get_several_artists(artist_ids[50:])['artists']
 
     features = get_several_track_features(track_ids)['audio_features']
 
