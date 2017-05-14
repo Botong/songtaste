@@ -154,11 +154,31 @@
         return /^[\x00-\x7F]*$/.test(str);
     }
 
+    function euc_dist(da, db) {
+        a = da.features;
+        b = db.features;
+        var dist = (a.loudness - b.loudness) * (a.loudness - b.loudness)
+            + (a.tempo / 200 - b.tempo / 200) * (a.tempo / 200 - b.tempo / 200)
+            + (a.valence - b.valence) * (a.valence - b.valence)
+            + (a.danceability - b.danceability) * (a.danceability - b.danceability)
+            + (a.energy - b.energy) * (a.energy - b.energy)
+            + (a.liveness - b.liveness) * (a.liveness - b.liveness)
+            + (a.acousticness - b.acousticness) * (a.acousticness - b.acousticness);
+        return dist;//Math.sqrt(dist)
+    }
+
     {#    d3.json("/data/recdata.json", function (json) {#}
     {#    alert("{{ recommendation }}");#}
 
+    function percentageToHsl(percentage, hue0, hue1) {
+        var hue = (percentage * (hue1 - hue0)) + hue0;
+        return 'hsl(' + hue + ', 100%, 50%)';
+    }
+
+{#    d3.json("/data/recdata.json", function (json) {#}
     d3.json("/recommendation/{{ artist_id }}/{{ track_id }}", function (json) {
         body.loading('stop');
+{#        console.log("/recommendation/{{ artist_id }}/{{ track_id }}");#}
         root = json;
         root.x0 = h / 2;
         root.y0 = 0;
@@ -277,8 +297,21 @@
                 return "translate(" + d.y + "," + d.x + ")";
             });
         nodeUpdate.select("circle")
-            .attr("r", 8)
+            .attr("r", function (d) {
+                if (d.father !== null) {
+                    var similarity = 8 - euc_dist(d, d.father);
+                    if (similarity < 4) {
+                        similarity = 4;
+                    }
+                    return similarity;
+                } else {
+                    return 0;
+                }
+            })
             .style("fill", function (d) {
+
+                {#                return percentageToHsl(d.popularity / 100.0, 225, 0);#}
+                {#                return getColorForPercentage(d.popularity / 100.0);#}
                 return d._children ? "lightsteelblue" : "#fff";
             });
         nodeUpdate.select("text")
@@ -348,10 +381,10 @@
         input.push(playing.features);
         if (root.name != playing.father.name) {
             input.push(playing.father.features);
-{#            document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);#}
-            $( "#radarParent" ).show();
+            {#            document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);#}
+            $("#radarParent").show();
         } else {
-            $( "#radarParent" ).hide();
+            $("#radarParent").hide();
         }
 
         var data = [];
@@ -387,8 +420,8 @@
         document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
         addTags();
         document.getElementById('recommended_song').innerHTML = "Recommended based on '" +
-            playing.father.name +"'acousticness danceability, valence, tempo, loudness, liveness, energy, and "+
-            playing.father.artist.name+"'s genres"
+            playing.father.name + "'acousticness danceability, valence, tempo, loudness, liveness, energy, and " +
+            playing.father.artist.name + "'s genres"
     }
 
     function addTags() {

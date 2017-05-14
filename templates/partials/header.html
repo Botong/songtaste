@@ -29,5 +29,7 @@
         path = "home"
     }
     var tab = document.getElementById(path);
-    tab.className += " active";
+    if (tab !== null) {
+        tab.className += " active";
+    }
 </script>

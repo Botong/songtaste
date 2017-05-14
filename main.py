@@ -110,7 +110,7 @@ def poster():
     return template.render()
 
 
-# def build_tree(tree, song_list, features, artists, index, depth, max_num, father):
+# def build_tree_dfs(tree, song_list, features, artists, index, depth, max_num, father):
 #     tree['name'] = song_list[index]['name']
 #     tree['artist'] = artists[index]
 #     tree['features'] = features[index]
@@ -133,7 +133,7 @@ def poster():
 #             if count >= max_num or index + count >= len(song_list):
 #                 return count
 #             node = {}
-#             count += build_tree(node, song_list, features, artists, index + count, depth+1, max_num/3, tree)
+#             count += build_tree_dfs(node, song_list, features, artists, index + count, depth+1, max_num/3, tree)
 #             tree['children'].append(node)
 #
 #     return count
@@ -141,7 +141,7 @@ def poster():
 
 # def generate_recommendation_tree(song_list, features, artists):
 #     tree = {}
-#     build_tree(tree, song_list, features, artists, 0, 0, len(song_list), None)
+#     build_tree_dfs(tree, song_list, features, artists, 0, 0, len(song_list), None)
 #     return tree
 
 
@@ -158,7 +158,7 @@ def find_most_similar(cur, list, start):
     return min_idx
 
 
-def build_tree(tree, song_list, index, depth, max_num, father):
+def build_tree_dfs(tree, song_list, index, depth, max_num, father):
     tree['name'] = song_list[index]['name']
     tree['artist'] = song_list[index]['artist']
     tree['features'] = song_list[index]['features']
@@ -183,17 +183,66 @@ def build_tree(tree, song_list, index, depth, max_num, father):
             if count >= max_num or index + count >= len(song_list):
                 return count
             node = {}
-            new_index = find_most_similar(tree, song_list, index+count)
+            new_index = find_most_similar(tree, song_list, index + count)
             song_list[index + count], song_list[new_index] = song_list[new_index], song_list[index + count]
-            count += build_tree(node, song_list, index + count, depth + 1, max_num / 3, tree)
+            count += build_tree_dfs(node, song_list, index + count, depth + 1, max_num / 3, tree)
             tree['children'].append(node)
 
     return count
 
 
+def build_tree_bfs(tree, song_list):
+    item = {'tree': tree, 'depth': 0, 'father': None, 'index': 0}
+
+    queue = [item]
+    head = 0
+    tail = 1
+
+    count = 1
+
+    while head < tail:
+        tree = queue[head]['tree']
+        depth = queue[head]['depth']
+        father = queue[head]['father']
+        index = queue[head]['index']
+        head += 1
+
+        if father is not None:
+            best_index = find_most_similar(father, song_list, index)
+            song_list[index], song_list[best_index] = song_list[best_index], song_list[index]
+
+        tree['name'] = song_list[index]['name']
+        tree['artist'] = song_list[index]['artist']
+        tree['features'] = song_list[index]['features']
+        tree['preview_url'] = song_list[index]['preview_url']
+        tree['image'] = song_list[index]['image']
+        tree['popularity'] = song_list[index]['popularity']
+
+        if father is not None:
+            tmp = father.copy()
+            tmp.pop('children', None)
+            tmp.pop('father', None)
+            tree['father'] = tmp
+        else:
+            tree['father'] = None
+
+        if depth < 4 and count < len(song_list):
+            tree['children'] = []
+            child_num = 3 if depth < 3 else 2
+            for _ in range(child_num):
+                if count < len(song_list):
+                    new_node = {}
+                    tree['children'].append(new_node)
+                    new_item = {'tree': new_node, 'depth': depth + 1, 'father': tree, 'index': count}
+                    queue.append(new_item)
+                    tail += 1
+                    count += 1
+
+
 def generate_recommendation_tree(song_list):
     tree = {}
-    build_tree(tree, song_list, 0, 0, len(song_list), None)
+    # build_tree_dfs(tree, song_list, 0, 0, len(song_list), None)
+    build_tree_bfs(tree, song_list)
     return tree
 
 
@@ -247,8 +296,9 @@ def recommendation(artist_id, track_id):
     remove_list = []
 
     for i in range(len(song_list)):
-        for j in range(i+1, len(song_list)):
-            if song_list[i]['name'] == song_list[j]['name'] and song_list[i]['artist']['name'] == song_list[j]['artist']['name']:
+        for j in range(i + 1, len(song_list)):
+            if song_list[i]['name'] == song_list[j]['name'] and song_list[i]['artist']['name'] == \
+                    song_list[j]['artist']['name']:
                 remove_list.append(song_list[j])
 
     for song in remove_list:
