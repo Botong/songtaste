@@ -230,6 +230,8 @@
                 } else {
                     closeSideBar();
                 }
+                addTags();
+
             })
             .on("dblclick", function (d) {
                 if (d !== root) {
@@ -238,6 +240,8 @@
                     update(d);
                     body.loading('stop');
                 }
+                addTags();
+
             })
         ;
         nodeEnter.append("svg:circle")
@@ -383,7 +387,6 @@
         document.getElementById('radarRoot').innerHTML = root.name.substring(0, 40);
         document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 40);
         document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
-        addTags();
     }
 
     function addTags() {
