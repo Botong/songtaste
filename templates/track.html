@@ -365,7 +365,9 @@
         document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 40);
         document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
         addTags();
-        document.getElementById('recommended_song').innerHTML = "Recommended based on '" + playing.father.name +"' danceability, valence, tempo, loudness, liveness, energy, and "+ playing.father.artist.name+" 's genres"
+        document.getElementById('recommended_song').innerHTML = "Recommended based on '" +
+            playing.father.name +"' danceability, valence, tempo, loudness, liveness, energy, and "+
+            playing.father.artist.name+"'s genres"
     }
 
     function addTags() {
@@ -374,10 +376,16 @@
             mydiv.removeChild(mydiv.lastChild);
         }
         var tags = intersection_destructive(clone(playing.artist.genres), clone(playing.father.artist.genres));
+        document.getElementById("tags").innerHTML = "Share Genres";
+        document.getElementById("tags").style.color = "black";
+        var breakLine = document.createElement('br');
+        mydiv.appendChild(breakLine);
         for (var i = 0; i < tags.length; i++) {
             var aTag = document.createElement('a');
             aTag.innerHTML = tags[i];
+            aTag.style.color = "white";
             mydiv.appendChild(aTag);
+
         }
     }
 

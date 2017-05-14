@@ -297,3 +297,4 @@ input[type="checkbox"]:checked + label:before {
     max-width: 300px;
     text-overflow: ellipsis;
 }
+
