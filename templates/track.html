@@ -378,7 +378,7 @@
         while (mydiv.hasChildNodes()) {
             mydiv.removeChild(mydiv.lastChild);
         }
-        var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
+        var tags = intersection_destructive(clone(playing.artist.genres), clone(playing.father.artist.genres));
         for (var i = 0; i < tags.length; i++) {
             var aTag = document.createElement('a');
             aTag.innerHTML = tags[i];
