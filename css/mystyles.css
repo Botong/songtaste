@@ -31,7 +31,14 @@ td.number{
 h1.page-title{
   font-size: 3.0em;
   font-weight: bold;
-  color: black;
+  color: #666;
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+h3.page-title{
+  font-size: 2.0em;
+  color: #666;
+    /*font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
 }
 
 .track-info {
@@ -40,7 +47,6 @@ h1.page-title{
 
 .track-info .track-name:hover{
     color: #699;
-
 }
 
 .track-info a:hover {
