@@ -343,8 +343,29 @@
         var margin = {top: 100, right: 100, bottom: 100, left: 100},
             width = 250;
         height = 250;
+        var input = [];
+        input.push(root.features);
+        input.push(playing.features);
+        if (root.name != playing.father.name) {
+            input.push(playing.father.features);
+{#            document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);#}
+            $( "#radarParent" ).show();
+        } else {
+            $( "#radarParent" ).hide();
+        }
 
-        var data = setupRadar(root.features, playing.features, playing.father.features);
+        var data = [];
+
+        for (var i = 0; i < input.length; i++) {
+            data.push([
+                {axis: "acousticness", value: input[i].acousticness},
+                {axis: "danceability", value: input[i].danceability},
+                {axis: "energy", value: input[i].energy},
+                {axis: "liveness", value: input[i].liveness},
+                {axis: "loudness", value: (input[i].loudness + 60) / 60},
+                {axis: "tempo", value: input[i].tempo / 200},
+                {axis: "valence", value: input[i].valence}])
+        }
 
         // EDC951 seed, CC333F current, 00A0B0 parent
         var color = d3.scale.ordinal()
@@ -377,7 +398,7 @@
         }
         var tags = intersection_destructive(clone(playing.artist.genres), clone(playing.father.artist.genres));
         document.getElementById("tags").innerHTML = "Shared Genres";
-        document.getElementById("tags").style.color = "#4a4a4a";
+        document.getElementById("tags").style.color = "#6a6a6a";
         var breakLine = document.createElement('br');
         mydiv.appendChild(breakLine);
         for (var i = 0; i < tags.length; i++) {
@@ -385,7 +406,6 @@
             aTag.innerHTML = tags[i];
             aTag.style.color = "white";
             mydiv.appendChild(aTag);
-
         }
     }
 
@@ -449,25 +469,6 @@
         playing.father.features = parentTmp;
         parentTmp = tmp;
         renderRadar();
-    }
-
-    function setupRadar(d0, d1, d2) {
-        var input = [d0, d1, d2];
-        var output = [];
-
-        for (var i = 0; i < 3; i++) {
-            output.push([
-                {axis: "acousticness", value: input[i].acousticness},
-                {axis: "danceability", value: input[i].danceability},
-                {axis: "energy", value: input[i].energy},
-                {#                {axis: "instrumentalness", value: input[i].instrumentalness},#}
-                {axis: "liveness", value: input[i].liveness},
-                {axis: "loudness", value: (input[i].loudness + 60) / 60},
-                {#                {axis:"speechiness",value:input[i].speechiness},#}
-                {axis: "tempo", value: input[i].tempo / 200},
-                {axis: "valence", value: input[i].valence}])
-        }
-        return output;
     }
 
     function clone(obj) {

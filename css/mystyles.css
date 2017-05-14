@@ -270,8 +270,12 @@ label {
     border-radius: 3px;
 }
 
+ input[type="checkbox"] + label:before{
+     content: "\2713";
+ }
+
 input[type="checkbox"]:checked + label:before {
-    content: "\2713";
+    content: "";
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     font-size: 15px;
     text-align: center;
@@ -280,10 +284,8 @@ input[type="checkbox"]:checked + label:before {
 
 .single-tags {
     margin-top: 10px;
-}
-
-.single-tags {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 25px;
 }
 
 
