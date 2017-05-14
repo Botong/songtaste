@@ -1,63 +1,63 @@
-
 {% include 'partials/head.html' %}
 
 <div class="container">
     <div class="main inactive">
-      <section class="search">
-        <div class="search-box">
-          <div class="introduction-text">
-            <h4>Search over artists or songs around the world.</h4>
-            </br>
-          </div>
-          <div class="cancel"></div>
-          <form class="search-form" action="search" method='POST'>
-            <div class="query-box">
-                <input class="query-input" type=text name=artist placeholder="e.g. 'taylor swift', 'queen'">
+        <section class="search">
+            <div class="search-box">
+                <div class="introduction-text">
+{#                    <h4>Search over artists or songs around the world.</h4>#}
+                    <h4>Search over for artists or songs you like.</h4>
+                    <br>
+                </div>
+                <div class="cancel"></div>
+                <form class="search-form" action="search" method='POST'>
+                    <div class="query-box">
+                        <input class="query-input" type=text name=artist placeholder="e.g. 'taylor swift', 'queen'">
+                    </div>
+                </form>
             </div>
-          </form>
-        </div>
-      </section>
+        </section>
     </div>
     <script>
 
         /* Functional, Memoized, cached, and object-oriented spotify search. written in vanilla js.
- */
+         */
 
-var search = document.getElementsByClassName("query-input")[0];
+        var search = document.getElementsByClassName("query-input")[0];
 
-search.addEventListener("keyup", function(e) {
-  var query = e.target.value;
-  var results = document.getElementById("results");
-  results.classList = query === "" ? "" : "active";
-  searchLibrary(query);
-});
-search.addEventListener("focus", function(e) {
-  var main = document.getElementsByClassName("main")[0];
-  main.classList = "main";
-});
+        search.addEventListener("keyup", function (e) {
+            var query = e.target.value;
+            var results = document.getElementById("results");
+            results.classList = query === "" ? "" : "active";
+            searchLibrary(query);
+        });
+        search.addEventListener("focus", function (e) {
+            var main = document.getElementsByClassName("main")[0];
+            main.classList = "main";
+        });
 
-//cancel on X click or ESC
-var cancel = document.getElementsByClassName("cancel")[0];
-cancel.addEventListener("click", cancelInput);
+        //cancel on X click or ESC
+        var cancel = document.getElementsByClassName("cancel")[0];
+        cancel.addEventListener("click", cancelInput);
 
-document.onkeydown = function(e) {
-  e = e || window.event;
-  var isEscape = false;
-  if ("key" in e) {
-    isEscape = e.key == "Escape";
-  } else {
-    isEscape = e.keyCode == 27;
-  }
-  if (isEscape) cancelInput();
-};
+        document.onkeydown = function (e) {
+            e = e || window.event;
+            var isEscape = false;
+            if ("key" in e) {
+                isEscape = e.key == "Escape";
+            } else {
+                isEscape = e.keyCode == 27;
+            }
+            if (isEscape) cancelInput();
+        };
 
-function cancelInput() {
-  var main = document.getElementsByClassName("main")[0];
-  main.classList.add("inactive");
-  search.value = '';
-  document.getElementById("results").classList = "";
-  search.blur();
-}</script>
+        function cancelInput() {
+            var main = document.getElementsByClassName("main")[0];
+            main.classList.add("inactive");
+            search.value = '';
+            document.getElementById("results").classList = "";
+            search.blur();
+        }</script>
 </div>
 
 {% include 'partials/foot.html' %}

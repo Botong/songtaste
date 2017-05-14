@@ -32,20 +32,7 @@
             <p>Double Click to recommend more like the song you choose.
         </div>
         <div id="footer">
-            <div class="hint"><p>This is an overview of tools available for building web-based data visualisations and
-                is
-                for a presentation by <a href="http://animateddata.co.uk/">Peter Cook</a> at <a
-                        href="http://www.meetup.com/Data-Visualisation-Brighton/">Data Visualisation Brighton</a>.</p>
-                <p>It is not comprehensive. If you feel there's a glaring omission please <a
-                        href="http://animateddata.co.uk/contact/">contact me</a>. (For a more comprehensive list try
-                    Andy
-                    Kirk's <a href="http://www.visualisingdata.com/index.php/resources/">Visualising Data</a>.)</p>
-                <p>This is an adaptation of Mike Bostock's D3 tree layout <a
-                        href="http://mbostock.github.io/d3/talk/20111018/tree.html">example</a>. Thanks Mike :)</p>
-                <p>Click a circle to expand or collapse. Grey indicates not free.</p>
-                <p>I'm available <a href="http://animateddata.co.uk/contact">for hire</a>.</p>
-                <p><a href="http://animateddata.co.uk/training">Find out</a> about my <a
-                        href="http://animateddata.co.uk/training">data visualisation workshops</a></p>.
+            <div class="hint">
             </div>
         </div>
     </div>
@@ -391,7 +378,7 @@
         while (mydiv.hasChildNodes()) {
             mydiv.removeChild(mydiv.lastChild);
         }
-        var tags = intersection_destructive(playing.artist.genres, playing.father.artist.genres);
+        var tags = intersection_destructive(clone(playing.artist.genres), clone(playing.father.artist.genres));
         for (var i = 0; i < tags.length; i++) {
             var aTag = document.createElement('a');
             aTag.innerHTML = tags[i];
