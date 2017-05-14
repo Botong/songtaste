@@ -376,8 +376,8 @@
             mydiv.removeChild(mydiv.lastChild);
         }
         var tags = intersection_destructive(clone(playing.artist.genres), clone(playing.father.artist.genres));
-        document.getElementById("tags").innerHTML = "Share Genres";
-        document.getElementById("tags").style.color = "black";
+        document.getElementById("tags").innerHTML = "Shared Genres";
+        document.getElementById("tags").style.color = "#4a4a4a";
         var breakLine = document.createElement('br');
         mydiv.appendChild(breakLine);
         for (var i = 0; i < tags.length; i++) {
@@ -454,29 +454,6 @@
     function setupRadar(d0, d1, d2) {
         var input = [d0, d1, d2];
         var output = [];
-        var top = {};
-        {#        top['acousticness'] = max(input[0].acousticness, input[1].acousticness);#}
-        {#        top['danceability'] = max(input[0].danceability, input[1].danceability);#}
-        {#        top['energy'] = max(input[0].energy, input[1].energy);#}
-        {#        top['instrumentalness'] = max(input[0].instrumentalness, input[1].instrumentalness);#}
-        {#        top['liveness'] = max(input[0].liveness, input[1].liveness);#}
-        {#        top['loudness'] = max(input[0].loudness, input[1].loudness) + 60;#}
-        {#        top['tempo'] = max(input[0].tempo, input[1].tempo);#}
-        {#        top['valence'] = max(input[0].valence, input[1].valence);#}
-        {##}
-        {#        for (var i = 0; i < 2; i++) {#}
-        {#            output.push([#}
-        {#                {axis: "acousticness", value: input[i].acousticness / top['acousticness']},#}
-        {#                {axis: "danceability", value: input[i].danceability / top['danceability']},#}
-        {#                {axis: "energy", value: input[i].energy / top['energy']},#}
-        {#                {axis: "instrumentalness", value: input[i].instrumentalness / top['instrumentalness']},#}
-        {#                {axis: "liveness", value: input[i].liveness / top['liveness']},#}
-        {#                {axis: "loudness", value: (input[i].loudness + 60) / top['loudness']},#}
-        {#                {axis:"speechiness",value:input[i].speechiness},#}
-        {#                {axis: "tempo", value: input[i].tempo / top['tempo']},#}
-        {#                {axis: "valence", value: input[i].valence / top['valence']}])#}
-        {#        }#}
-
 
         for (var i = 0; i < 3; i++) {
             output.push([

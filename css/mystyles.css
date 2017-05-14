@@ -282,6 +282,11 @@ input[type="checkbox"]:checked + label:before {
     margin-top: 10px;
 }
 
+.single-tags {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
 .single-tags a {
     display: inline-block;
     background: #3e7ac2;
