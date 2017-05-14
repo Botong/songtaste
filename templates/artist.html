@@ -3,14 +3,18 @@
     <div class="container" style="background: #fafafa; padding: 20px">
         <section class="sec">
             <h1 class="page-title">{{ artist.name }}</h1>
-{#            <a href="{{ artist.external_urls.spotify }}">#}
-{#                {{ artist.name }} on Spotify#}
-{#            </a>#}
+            {#            <a href="{{ artist.external_urls.spotify }}">#}
+            {#                {{ artist.name }} on Spotify#}
+            {#            </a>#}
 
             {#          <div class="col-md-12">#}
+
+    <div id="header" style="margin-left: 64px; margin-top: 170px; position: fixed">
+        Click on a track to get recommendation
+    </div>
             {% if tracks %}
                 <section class="sec tracks">
-                    <h3 class="page-title">click on a track to get recommendation:</h3>
+{#                    <h3 class="page-title">C:</h3>#}
                     <div class="row">
                         {% for t in tracks %}
                             <div class="col-md-6 col-sm-12">
@@ -28,9 +32,9 @@
                                        style="width: 323px; height: 323px; object-position: center; display: inline-block; overflow: hidden">
                                         <img class="{{ direction }}" src="{{ t.album.images[0].url }}">
                                     </a>
-{#                                    <div#}
-{#                                         style="width: 323px; height: 323px; overflow:hidden; background-image: url({{ t.album.images[0].url }}); ">#}
-{#                                    </div>#}
+                                    {#                                    <div#}
+                                    {#                                         style="width: 323px; height: 323px; overflow:hidden; background-image: url({{ t.album.images[0].url }}); ">#}
+                                    {#                                    </div>#}
                                     <div class="caption" style="padding: 9px">
                                         <span class="track-name"><a
                                                 href="/artist/{{ artist.id }}/track/{{ t.id }}">{{ t.name }}</a></span>
