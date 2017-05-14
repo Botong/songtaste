@@ -278,11 +278,22 @@ input[type="checkbox"]:checked + label:before {
     line-height: 15px;
 }
 
+.single-tags {
+    margin-top: 10px;
+}
+
 .single-tags a {
     display: inline-block;
-    color: #3e7ac2;
-    background: #eef4fa;
+    background: #3e7ac2;
     border-radius: 20px;
     padding: 3px 12px;
     margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.sidebar .row {
+    max-height: 30px;
+    max-width: 300px;
+    text-overflow: ellipsis;
 }
