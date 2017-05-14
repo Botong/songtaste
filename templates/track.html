@@ -4,7 +4,8 @@
     <div class="sidebar right">
         <h3 style="color: #2a2a2a" id="sidebar_title">Title</h3>
         <h6 style="color: #4a4a4a" id="sidebar_artist">Title</h6>
-        <div class="radarChart" style="margin-left: -72px; margin-top: -24px;">
+        <p style="color: #6a6a6a; font-size: 12px" id="recommended_song"></p>
+        <div class="radarChart" style="margin-left: -72px; margin-top: -70px;">
         </div>
         <div style="margin-left: 20px; margin-top: -50px; width: 256px;">
             <div class="row">
@@ -173,13 +174,6 @@
             setThumbnail(root);
         }
 
-
-        // Initialize the display to show a few nodes.
-//         root.children.forEach(toggleAll);
-//         toggle(root._children[1]);
-//         toggle(root._children[1]._children[2]);
-//         toggle(root._children[9]);
-//         toggle(root._children[9]._children[0]);
         toggleAll(root);
         toggle(root);
         update(root);
@@ -371,6 +365,7 @@
         document.getElementById('radarCurrent').innerHTML = playing.name.substring(0, 40);
         document.getElementById('radarParent').innerHTML = playing.father.name.substring(0, 40);
         addTags();
+        document.getElementById('recommended_song').innerHTML = "Recommended based on '" + playing.father.name +"' danceability, valence, tempo, loudness, liveness, energy, and "+ playing.father.artist.name+" 's genres"
     }
 
     function addTags() {
