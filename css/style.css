@@ -74,7 +74,7 @@ body {
 
 #footer {
     top: 520px;
-    right: 10px;
+    left: 16px;
     width: 300px;
     text-align: right;
 }
@@ -124,8 +124,8 @@ a:hover {
 }
 
 .hint {
-    position: absolute;
-    right: 0;
+    position: fixed;
+    left: 16px;
     /*width: 1280px;*/
     font-size: 12px;
     color: #999;
