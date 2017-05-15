@@ -73,10 +73,10 @@ body {
 }
 
 #footer {
-    top: 520px;
+    top: 512px;
     left: 16px;
     width: 300px;
-    text-align: right;
+    text-align: left;
 }
 
 rect {
